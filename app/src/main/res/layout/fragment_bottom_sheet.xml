@@ -10,34 +10,48 @@
         tools:context=".ui.BottomSheet">
 
 
-        <Button
+        <com.google.android.material.button.MaterialButton
+            app:icon="@drawable/googleg_disabled_color_18"
             android:id="@+id/googleButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:text="Login with Google"
+            android:text="@string/login_with_google_btn_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button3" />
+            app:layout_constraintTop_toBottomOf="@+id/phoneBtn" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="Welcome back !"
+            android:layout_marginStart="@dimen/largeDimen"
+            android:layout_marginTop="@dimen/largeDimen"
+            android:layout_marginEnd="@dimen/largeDimen"
+            android:text="@string/welcome_back_header"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/button3"
+
+        <com.google.android.material.button.MaterialButton
+            app:icon="@drawable/fui_ic_phone_white_24dp"
+            android:id="@+id/phoneBtn"
+            android:layout_marginStart="@dimen/extra_extra_large_dimen"
+            android:layout_marginTop="@dimen/largeDimen"
+            android:layout_marginEnd="@dimen/extra_extra_large_dimen"
+            android:text="@string/login_with_phone_number_btn_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+        <!--<com.facebook.login.widget.LoginButton
+            android:id="@+id/facebookBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -46,24 +60,24 @@
             android:text="Login with Facebook"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />-->
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="By signing up, you are agreeing to our "
+            android:layout_marginTop="@dimen/mediumDimen"
+            android:text="@string/line_1_privacy_policy"
             app:layout_constraintEnd_toEndOf="@+id/googleButton"
             app:layout_constraintStart_toStartOf="@+id/googleButton"
             app:layout_constraintTop_toBottomOf="@+id/googleButton" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="User Agreement and Privacy Policy "
+            android:layout_marginTop="@dimen/mediumDimen"
+            android:text="@string/line_2_privacy_policy"
             app:layout_constraintEnd_toEndOf="@+id/textView8"
             app:layout_constraintStart_toStartOf="@+id/textView8"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />

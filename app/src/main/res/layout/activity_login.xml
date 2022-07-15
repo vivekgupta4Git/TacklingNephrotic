@@ -9,88 +9,83 @@
         app:layoutDescription="@xml/activity_login_scene">
 
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
+        android:textAppearance="@style/TextAppearance.Material3.DisplayMedium"
         android:id="@+id/appHeaderTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="@dimen/extra_large"
+        android:layout_marginTop="@dimen/extra_large"
+        android:layout_marginEnd="@dimen/extra_large"
         android:fontFamily="cursive"
         android:gravity="center"
-        android:text="@string/welcome_header"
+        android:text="@string/app_name_header"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="48sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/ease"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="with ease.."
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="@+id/appHeaderTv"
-            app:layout_constraintTop_toBottomOf="@+id/appHeaderTv" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/ease"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mediumDimen"
+        android:text="@string/app_name_supporter"
+        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+        app:layout_constraintEnd_toEndOf="@+id/appHeaderTv"
+        app:layout_constraintTop_toBottomOf="@+id/appHeaderTv" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/getStartedButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="Get Started"
-            android:textAlignment="center"
-            app:layout_constraintBottom_toTopOf="@+id/textView6"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5"
-            app:layout_constraintVertical_bias="0.37" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/getStartedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/get_started_button_text"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.37" />
 
         <com.google.android.material.textview.MaterialTextView
-
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
             android:id="@+id/alreadyLoginText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/already_have_an_account"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@id/getStartedButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/getStartedButton" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/signIn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/smallDimen"
-            android:foreground="?attr/selectableItemBackgroundBorderless"
-            android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@id/alreadyLoginText"
-            app:layout_constraintTop_toTopOf="@id/alreadyLoginText" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/signIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/smallDimen"
+        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+        app:layout_constraintStart_toEndOf="@id/alreadyLoginText"
+        app:layout_constraintTop_toTopOf="@id/alreadyLoginText" />
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/smallDimen"
-            android:gravity="center"
-            android:lines="4"
-            android:text="@string/about_app"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appHeaderTv"
-            app:layout_constraintVertical_bias="0.060000002" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textView5"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/smallDimen"
+        android:gravity="center"
+        android:text="@string/about_app"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ease"
+        app:layout_constraintVertical_bias="0.060000002" />
 
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -99,7 +94,7 @@
         android:layout_marginBottom="32dp"
         android:fontFamily="cursive"
         android:text="@string/madeInIndia"
-        android:textColor="@color/black"
+        android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

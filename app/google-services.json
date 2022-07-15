@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "813139168902",
-    "project_id": "tacklingnephrotic",
-    "storage_bucket": "tacklingnephrotic.appspot.com"
+    "project_number": "522507155002",
+    "project_id": "mynephproject",
+    "storage_bucket": "mynephproject.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:813139168902:android:66bf0bd679159a374b4b07",
+        "mobilesdk_app_id": "1:522507155002:android:4225165f71e1194325a703",
         "android_client_info": {
           "package_name": "com.ruviApps.tacklingnephrotic"
         }
       },
       "oauth_client": [
         {
-          "client_id": "813139168902-qoa5quls6g38r6jd1sv0efag43kl3adb.apps.googleusercontent.com",
+          "client_id": "522507155002-oi2cmmd3fd40lpsu4vd0sijkcl5junsh.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD4N3T_A0LaxEFl4eu1U-VvkCLkbVPpIHI"
+          "current_key": "AIzaSyCAqSA4d19Pw9aHtiML8plpJOhAkcCVv2s"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "813139168902-qoa5quls6g38r6jd1sv0efag43kl3adb.apps.googleusercontent.com",
+              "client_id": "522507155002-oi2cmmd3fd40lpsu4vd0sijkcl5junsh.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -15,7 +15,7 @@
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:pathMotionArc="none"
-            app:transitionEasing="accelerate"
+            app:transitionEasing="linear"
             android:scaleX="0.5"
             android:scaleY="0.5"
             android:translationY="30dp" />
@@ -29,7 +29,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="24dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView6" />
+            app:layout_constraintBottom_toBottomOf="@+id/textView6"
+            app:layout_constraintVertical_bias="0.86" />
         <Constraint
             android:id="@+id/getStartedButton"
             app:layout_constraintEnd_toEndOf="parent"
@@ -60,6 +61,27 @@
             android:layout_marginStart="@dimen/smallDimen"
             app:layout_constraintTop_toTopOf="@id/alreadyLoginText"
             android:alpha="0" />
+        <Constraint
+            android:id="@+id/ease"
+            app:layout_constraintEnd_toEndOf="@+id/appHeaderTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/appHeaderTv"
+            android:layout_marginTop="8dp"
+            android:alpha="0"
+            android:translationX="1000dp"
+            android:translationY="1000dp" />
+        <Constraint
+            android:id="@+id/textView5"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.060000002"
+            app:layout_constraintTop_toBottomOf="@+id/appHeaderTv"
+            android:alpha="0"
+            android:translationX="-1000dp"
+            android:translationY="-1000dp" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
@@ -78,8 +100,8 @@
     </ConstraintSet>
 
     <Transition
-        app:duration="1500"
-        app:motionInterpolator="@string/material_motion_easing_accelerated"
+        app:duration="2000"
+        app:motionInterpolator="anticipate"
         app:autoTransition="animateToEnd"
         app:constraintSetEnd="@id/end"
         app:constraintSetStart="@id/start"/>

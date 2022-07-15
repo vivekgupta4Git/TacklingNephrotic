@@ -80,7 +80,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\Vivek\Pictures\imagesForApp\left_pointing_finger.jpg" />
+                                                <entry key="imagePath" value="C:\Users\Vivek\Pictures\imagesForApp\parents-preparing-cute-daughter-school-love-study-backpack-flat-illustration-cartoon-illustration\Parents preparing cute daughter to school.jpg" />
+                                                <entry key="scalingPercent" value="88" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -112,7 +113,9 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="left_pointing_finger" />
+                                      <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="ffffff" />
+                                      <entry key="outputName" value="caretaker" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -306,7 +309,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/arrow_forward/baseline_arrow_forward_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/settings_phone/baseline_settings_phone_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -316,7 +319,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_baseline_arrow_forward_24" />
+                            <entry key="outputName" value="ic_baseline_settings_phone_24" />
                             <entry key="sourceFile" value="E:\TacklingNephrotic" />
                           </map>
                         </option>
