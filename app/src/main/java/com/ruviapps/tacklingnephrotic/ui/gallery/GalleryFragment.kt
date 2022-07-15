@@ -8,8 +8,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ruviapps.tacklingnephrotic.databinding.FragmentGalleryBinding
+import com.ruviapps.tacklingnephrotic.ui.test_result.BaseFragment
 
-class GalleryFragment : Fragment() {
+class GalleryFragment : BaseFragment() {
 
     private var _binding: FragmentGalleryBinding? = null
 

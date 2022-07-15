@@ -12,6 +12,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.ruviapps.tacklingnephrotic.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-      setSupportActionBar(binding.appBarMain.toolbar)
+      setSupportActionBar(binding.appBarMain.bottomAppBar)
 
         binding.appBarMain.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -68,11 +69,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setBottomBarVisibility(visibility: Int){
-        binding.appBarMain.toolbar.visibility = visibility
+        lifecycleScope.launchWhenStarted {
+            binding.appBarMain.bottomAppBar.visibility = visibility
+        }
     }
 
     fun setFabVisibility(visibility: Int){
-        binding.appBarMain.fab.visibility = visibility
+        lifecycleScope.launchWhenStarted {
+            binding.appBarMain.fab.visibility = visibility
+        }
     }
 
 

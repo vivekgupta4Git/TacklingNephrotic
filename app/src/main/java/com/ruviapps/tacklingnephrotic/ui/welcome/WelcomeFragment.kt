@@ -21,22 +21,15 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import com.ruviapps.tacklingnephrotic.R
 import com.ruviapps.tacklingnephrotic.databinding.FragmentWelcomeBinding
+import com.ruviapps.tacklingnephrotic.ui.test_result.BaseFragment
 
-class WelcomeFragment : Fragment() {
+class WelcomeFragment : BaseFragment() {
 
     companion object {
         const val TAG = "WelcomeFragment"
-        const val SIGN_IN_REQUEST_CODE = 10
     }
     private lateinit var binding : FragmentWelcomeBinding
     private lateinit var viewModel: WelcomeViewModel
-    private val signInLauncher = registerForActivityResult(
-        FirebaseAuthUIActivityResultContract()
-    ){
-        result->
-
-    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,43 +40,15 @@ class WelcomeFragment : Fragment() {
     }
 
 
-  /*  override fun onDetach() {
-        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-
-    }
-*/
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-        binding.signInButton.setOnClickListener {
-            startActivityForResult(
-                AuthUI.getInstance()
-                    .createSignInIntentBuilder()
-                    .setAvailableProviders(viewModel.getProviders())
-                    .build(),
-                    SIGN_IN_REQUEST_CODE
-            )
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-     if(requestCode == SIGN_IN_REQUEST_CODE){
-         val response = IdpResponse.fromResultIntent(data)
-         if(resultCode== Activity.RESULT_OK){
-             Log.i(TAG,"Successfully signed in ${FirebaseAuth.getInstance().currentUser}")
-         }else
-         {
-             Log.i(TAG,"Sign in Unsuccessful ${response?.error?.errorCode}")
-         }
-     }
-    }
-
-    override fun onStart() {
-        super.onStart()
-      if(viewModel.getAuth().currentUser != null){
-         // viewModel.setUserLoggedIn()
-      }
+        //first time user screen
+        /**
+         * Greet user and Ask for its role
+         * CareTaker/Parent or Patient
+         *
+         */
+        //second time user screen
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

@@ -23,7 +23,7 @@ import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
-import com.ruviapps.tacklingnephrotic.ui.BottomSheet
+import com.ruviapps.tacklingnephrotic.ui.login.BottomSheet
 
 
 class LoginActivity : AppCompatActivity() {

@@ -8,8 +8,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ruviapps.tacklingnephrotic.databinding.FragmentSlideshowBinding
+import com.ruviapps.tacklingnephrotic.ui.test_result.BaseFragment
 
-class SlideshowFragment : Fragment() {
+class SlideshowFragment : BaseFragment() {
 
     private var _binding: FragmentSlideshowBinding? = null
 

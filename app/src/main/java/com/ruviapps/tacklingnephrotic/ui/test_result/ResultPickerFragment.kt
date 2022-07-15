@@ -3,17 +3,17 @@ package com.ruviapps.tacklingnephrotic.ui.test_result
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ScrollView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.FileProvider
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -29,14 +29,17 @@ import java.time.LocalDate
 import java.util.*
 
 
-
 @AndroidEntryPoint
-class ResultPickerFragment : Fragment() {
+class ResultPickerFragment : BaseFragment() {
+    override var bottomAppBarVisibility: Int = View.GONE
+    override var fabVisibility: Int = View.GONE
     companion object {
         const val NO_SELECTION = -100
     }
     private var selectedReadingValue = NO_SELECTION
     private var latestImageUri : Uri? = null
+    private lateinit var scrollView : ScrollView
+
     private lateinit var firstCardPreviewImage : ImageView
     private lateinit var secondCardPreviewImage : ImageView
     private lateinit var thirdCardPreviewImage : ImageView
@@ -104,15 +107,23 @@ class ResultPickerFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = ReadingSliderBinding.inflate(layoutInflater)
-        viewModel.initializeDatabase()
+
+    //    viewModel.initializeDatabase()
         return binding.root
     }
+
+
+
+
+
 
 
     private fun clearSelection() = setCardActive(-1)
     private var imageCollection  = mutableListOf<ImageView>()
     private  var cardCollection : List<CardView> = mutableListOf()
     private fun initializedBinding(){
+       scrollView = binding.scrollView
+
         firstCardView = binding.firstCard
         secondCardView = binding.secondCard
         thirdCardView = binding.thirdCard
@@ -139,10 +150,15 @@ class ResultPickerFragment : Fragment() {
         cardCollection = mutableListOf(firstCardView,secondCardView,thirdCardView,forthCardView,fifthCardView,sixthCardView)
     }
 
+
+
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializedBinding()
+
+
 
         viewModel.navigateToDashBoard.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let { command ->
@@ -160,7 +176,7 @@ class ResultPickerFragment : Fragment() {
 
         val container = binding.constraintLayoutContainer
         container.setOnTouchListener { _, event ->
-
+            scrollView.requestDisallowInterceptTouchEvent(true)
             when (event.action and event.actionMasked) {
                 MotionEvent.ACTION_MOVE -> {
                     move(event)

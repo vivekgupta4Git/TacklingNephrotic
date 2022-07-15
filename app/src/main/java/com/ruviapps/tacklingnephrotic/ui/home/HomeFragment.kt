@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.ruviapps.tacklingnephrotic.databinding.FragmentHomeBinding
+import com.ruviapps.tacklingnephrotic.ui.test_result.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -20,7 +21,7 @@ import java.time.LocalDate
 
 @AndroidEntryPoint
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
 
     private var _binding: FragmentHomeBinding? = null
 

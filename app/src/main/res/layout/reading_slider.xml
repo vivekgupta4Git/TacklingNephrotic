@@ -2,20 +2,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+<ScrollView
+    android:theme="@style/Theme.App.MyTheme"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/constraintLayoutContainer"
-    android:layout_margin="@dimen/mediumDimen"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent">
-
 
     <androidx.cardview.widget.CardView
         android:id="@+id/sliderContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="@dimen/largeDimen"
-        android:clipToPadding="false"
+        android:layout_marginStart="@dimen/largeDimen"
+        android:clipToPadding="true"
         app:cardCornerRadius="@dimen/largeDimen"
         app:cardElevation="@dimen/mediumDimen"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -39,12 +42,13 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:layout_marginTop="@dimen/largeDimen"
         app:layout_constraintStart_toEndOf="@+id/sliderContainer"
         android:id="@+id/readingsContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
         app:cardBackgroundColor="@color/material_on_surface_stroke"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
@@ -386,22 +390,19 @@
         android:layout_marginEnd="@dimen/largeDimen"
         android:layout_marginBottom="@dimen/largeDimen"
         android:text="Take Picture"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clearSelectionButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:layout_margin="@dimen/mediumDimen"
+        android:layout_margin="@dimen/largeDimen"
         android:id="@+id/clearSelectionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Clear Selection"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/cameraButton"
-        app:layout_constraintTop_toBottomOf="@+id/readingsContainer"
         app:layout_constraintEnd_toStartOf="@+id/confirmSelectionButton"
-        tools:layout_editor_absoluteX="35dp"
-        tools:layout_editor_absoluteY="677dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/readingsContainer" />
 
     <Button
         android:layout_margin="@dimen/mediumDimen"
@@ -411,8 +412,8 @@
         android:layout_height="wrap_content"
         android:text="Confirm Selection"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/cameraButton"
-        app:layout_constraintTop_toBottomOf="@+id/readingsContainer"
+        app:layout_constraintTop_toTopOf="@id/clearSelectionButton"
+        app:layout_constraintBottom_toBottomOf="@id/clearSelectionButton"
         tools:layout_editor_absoluteX="241dp"
         tools:layout_editor_absoluteY="677dp" />
     <!--end of readingContainer -->
@@ -420,4 +421,6 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
 </layout>

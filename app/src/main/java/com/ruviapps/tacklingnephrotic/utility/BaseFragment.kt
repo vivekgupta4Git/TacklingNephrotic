@@ -9,8 +9,8 @@ import com.ruviapps.tacklingnephrotic.MainActivity
 
 open class BaseFragment : Fragment() {
 
-    open val isBottomBarVisible = View.VISIBLE
-    open val isFabVisible =View.VISIBLE
+ protected   open val isBottomBarVisible = View.VISIBLE
+ protected   open val isFabVisible =View.VISIBLE
 
     override fun onCreateView(
         inflater: LayoutInflater,

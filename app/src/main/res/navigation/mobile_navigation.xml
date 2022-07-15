@@ -42,10 +42,10 @@
         android:id="@+id/deepLink"
         app:uri="0drd7hpogt" />
     <fragment
+        android:label="Welcome"
         tools:layout="@layout/fragment_welcome"
         android:id="@+id/nav_welcome"
-        android:name="com.ruviapps.tacklingnephrotic.ui.welcome.WelcomeFragment"
-        android:label="Welcome" >
+        android:name="com.ruviapps.tacklingnephrotic.ui.welcome.WelcomeFragment">
         <action
             android:id="@+id/action_welcome_to_nav_result"
             app:destination="@id/nav_result" />
