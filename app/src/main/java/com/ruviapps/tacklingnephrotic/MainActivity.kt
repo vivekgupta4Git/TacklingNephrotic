@@ -26,14 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val passedIntent = intent
-        val userName = passedIntent.getStringExtra(LoginActivity.INTENT_EXTRA_USERNAME)
-        val phoneNumber = passedIntent.getStringExtra(LoginActivity.INTENT_EXTRA_PHONE)
-        val isNewUser = passedIntent.getStringExtra(LoginActivity.INTENT_EXTRA_IS_NEW_USER).toBoolean()
-        val email = passedIntent.getStringExtra(LoginActivity.INTENT_EXTRA_EMAIL)
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
+                binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
       setSupportActionBar(binding.appBarMain.bottomAppBar)
@@ -45,14 +38,6 @@ class MainActivity : AppCompatActivity() {
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-
-        val graph = navController.navInflater.inflate(R.navigation.mobile_navigation)
-
-       if(isNewUser) {
-           graph.setStartDestination(R.id.nav_userRole)
-       }else
-           graph.setStartDestination(R.id.nav_result)
-        navController.graph = graph
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
