@@ -9,5 +9,6 @@ data class CareTakerUseCases @Inject constructor(
     val patientsOfCareTakerUseCase: PatientsOfCareTakerUseCase,
     val deleteCareTakerUseCases: DeleteCareTakerUseCases,
     val deleteAllCareTakerUseCase: DeleteAllCareTakerUseCase,
-    val listOfCareTakersWithPatients: ListOfCareTakersWithPatients
+    val listOfCareTakersWithPatients: ListOfCareTakersWithPatients,
+    val isValidCareTaker: IsValidCareTaker
 )

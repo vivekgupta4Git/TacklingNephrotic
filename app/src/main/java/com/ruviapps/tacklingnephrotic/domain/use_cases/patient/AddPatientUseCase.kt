@@ -15,7 +15,7 @@ class AddPatientUseCase @Inject constructor(
         patientAge : Int?,
         patientWeight : Float?,
         patientPicUri : String = "",
-        underCareTakerId: Long
+        underCareTakerId: String
     ) : QueryResult<Long>
     {
         if(patientName.isEmpty()||patientName.isBlank())
@@ -27,9 +27,6 @@ class AddPatientUseCase @Inject constructor(
         else if( patientWeight < 0){
                 return QueryResult.Error("Weight Cannot be Negative", VALIDATION_ERROR)
         }
-
-        if(underCareTakerId < 0 )
-            return QueryResult.Error("No CareTaker is present", VALIDATION_ERROR)
 
         val patient = Patient(0,patientName,patientAge,patientWeight,patientPicUri,underCareTakerId)
 

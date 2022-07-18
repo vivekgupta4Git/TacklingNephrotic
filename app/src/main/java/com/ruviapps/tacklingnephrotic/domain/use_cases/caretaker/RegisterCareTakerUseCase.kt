@@ -1,5 +1,7 @@
 package com.ruviapps.tacklingnephrotic.domain.use_cases.caretaker
 
+import android.content.Context
+import com.ruviapps.tacklingnephrotic.R
 import com.ruviapps.tacklingnephrotic.database.dto.QueryResult
 import com.ruviapps.tacklingnephrotic.domain.CareTaker
 import com.ruviapps.tacklingnephrotic.extension.toDatabaseCareTaker
@@ -12,12 +14,12 @@ class RegisterCareTakerUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(
+        uid : String,
         name: String,
         email: String = "",
         primaryContact: String,
-        secondaryContact: String?,
-
-        ): QueryResult<Long> {
+        secondaryContact: String?
+        ): QueryResult<Unit> {
 
         if(name.isBlank()||name.isEmpty())
             return QueryResult.Error("Name is not Valid", VALIDATION_ERROR)
@@ -34,15 +36,19 @@ class RegisterCareTakerUseCase @Inject constructor(
                 return QueryResult.Error("Contact is not valid", VALIDATION_ERROR)
             }
         }
+        val  careTaker = CareTaker(uid,name,email,primaryContact,secondaryContact)
 
-        val  careTaker = CareTaker(0,name,email,primaryContact,secondaryContact)
+        if(! IsValidCareTaker(repository).invoke(uid))
+           return QueryResult.Error("User Already Present",
+               VALIDATION_ERROR)
 
-       return repository.saveCareTaker(careTaker.toDatabaseCareTaker())
+        return repository.saveCareTaker(careTaker.toDatabaseCareTaker())
     }
 
     companion object{
         const val VALIDATION_ERROR=101
       }
+
 
     private fun isValidMobile(phone :String) : Boolean {
        return android.util.Patterns.PHONE.matcher(phone).matches()

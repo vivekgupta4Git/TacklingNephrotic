@@ -68,7 +68,8 @@ object UseCaseModule {
             patientsOfCareTakerUseCase = PatientsOfCareTakerUseCase(repo),
             deleteAllCareTakerUseCase = DeleteAllCareTakerUseCase(repo),
             deleteCareTakerUseCases = DeleteCareTakerUseCases(repo),
-            listOfCareTakersWithPatients = ListOfCareTakersWithPatients(repo)
+            listOfCareTakersWithPatients = ListOfCareTakersWithPatients(repo),
+            isValidCareTaker =  IsValidCareTaker(repo)
         )
     }
 

@@ -20,7 +20,7 @@ data class DatabasePatient(
     @ColumnInfo("snap_uri")
     val snapUri : String = "",
     @ColumnInfo(ColumnPatientCareTakerId,index=true)
-    val patientCaretakerId : Long
+    val patientCaretakerId : String
 ){
     companion object DatabasePatientColumns{
         const val ColumnPatientId = "patient_id"

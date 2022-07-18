@@ -25,13 +25,13 @@ class CareTakerLocalRepository @Inject constructor(
         {  QueryResult.Error(ex.localizedMessage) }
     }
 
-    override suspend fun getCareTaker(id :Long) : QueryResult<DatabaseCareTaker> = withContext(ioDispatcher){
+    override suspend fun getCareTaker(id :String) : QueryResult<DatabaseCareTaker> = withContext(ioDispatcher){
       return@withContext try { QueryResult.Success(careTakerDao.getCareTakerById(id))
       }catch (ex : Exception)
       {  QueryResult.Error(ex.localizedMessage) }
   }
 
-    override suspend fun saveCareTaker(careTaker: DatabaseCareTaker) : QueryResult<Long> =
+    override suspend fun saveCareTaker(careTaker: DatabaseCareTaker) : QueryResult<Unit> =
         withContext(ioDispatcher){
             return@withContext try {
                 QueryResult.Success(careTakerDao.insertCareTaker(careTaker),"Insert Successfully!")
@@ -70,7 +70,7 @@ class CareTakerLocalRepository @Inject constructor(
         }
     }
 
-    override suspend fun getPatientsOfCareTaker(id: Long): QueryResult<List<CareTakerWithPatients>> =
+    override suspend fun getPatientsOfCareTaker(id: String): QueryResult<List<CareTakerWithPatients>> =
         withContext(ioDispatcher){
             return@withContext try{
                 QueryResult.Success(careTakerDao.patientsOfCareTaker(id))

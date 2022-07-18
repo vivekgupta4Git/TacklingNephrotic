@@ -11,7 +11,7 @@ class PatientsOfCareTakerUseCase @Inject constructor (
 ) {
 
     suspend operator fun invoke(
-        careTakerId : Long
+        careTakerId : String
         ): QueryResult<List<CareTakerWithPatients>> {
         return  repository.getPatientsOfCareTaker(careTakerId)
 

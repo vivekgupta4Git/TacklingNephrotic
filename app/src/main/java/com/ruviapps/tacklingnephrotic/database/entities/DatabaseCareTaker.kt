@@ -7,9 +7,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = TableName.CaretakerTable)
 data class DatabaseCareTaker(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(ColumnCareTakerId)
-    val ctId : Long,
+    val ctId : String,
     @Embedded val fullName: FullName,
     @Embedded val contact : ContactInfo,
 

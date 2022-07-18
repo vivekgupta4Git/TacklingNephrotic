@@ -6,5 +6,5 @@ import javax.inject.Inject
 class GetCareTakerUseCase @Inject constructor(
     private val repository: CareTakerLocalRepository
 ){
-    suspend operator fun invoke(id : Long) = repository.getCareTaker(id)
+    suspend operator fun invoke(id : String) = repository.getCareTaker(id)
 }

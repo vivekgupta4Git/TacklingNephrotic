@@ -1,5 +1,6 @@
 package com.ruviapps.tacklingnephrotic.ui.test_result
 
+import android.app.Application
 import android.util.Log
 
 import androidx.lifecycle.*
@@ -61,12 +62,12 @@ class ResultPickerViewModel
 
     fun initializeDatabase() {
         viewModelScope.launch {
-            caretakerUseCases.registerCareTakerUseCase("Vivek Gupta",
+            caretakerUseCases.registerCareTakerUseCase("1","Vivek Gupta",
                 "itguru4all@gmail.com",
                 "9891417738",
-                null)
+                "")
             patientUseCaess.addPatientUseCase("Atharv Gupta",4,19.2f,
-            "",1)
+            "",1.toString())
         }
     }
 

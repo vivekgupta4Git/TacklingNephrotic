@@ -26,7 +26,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.time.LocalDate
-import java.util.*
 
 @MediumTest
 @RunWith(AndroidJUnit4::class)
@@ -63,7 +62,7 @@ class LocalRepositoryTest {
     @Test
     fun savedCareTaker_equalsToReposSavedCareTaker() = runBlocking {
 
-        val careTaker = CareTaker(1,
+        val careTaker = CareTaker(1.toString(),
                                     "Vivek Gupta",
                                     "itguru4all@gmail.com",
                                     "9891417738",null
@@ -75,7 +74,7 @@ class LocalRepositoryTest {
             assertEquals("Insert Successfully!",message)
         }
 
-        val failQueryResult =  careTakerRepo.getCareTaker(2)
+        val failQueryResult =  careTakerRepo.getCareTaker(2.toString())
         failQueryResult.onFailure { _, statusCode ->
             assertEquals(QueryResult.QUERY_FAILURE_STATUS_CODE,statusCode)
         }
@@ -97,10 +96,10 @@ class LocalRepositoryTest {
     @Test
     fun patientsUnderCareTakerObservation_equalsToDataRetrievedFromRepo() = runBlocking{
         //given two patients are under observation for one careTaker
-        val careTaker = CareTaker(1,"Vivek Gupta","itguru","9891417738",null)
+        val careTaker = CareTaker(1.toString(),"Vivek Gupta","itguru","9891417738",null)
         careTakerRepo.saveCareTaker(careTaker.toDatabaseCareTaker())
-        val patientOne = Patient(1,"Atharv Gupta",4,19.8f,"",1)
-        val patientTwo = Patient(2,"Utkarsh",7,24f,"",1)
+        val patientOne = Patient(1,"Atharv Gupta",4,19.8f,"",1.toString())
+        val patientTwo = Patient(2,"Utkarsh",7,24f,"",1.toString())
         patientsRepo.savePatient(patientOne.toDatabasePatient())
         patientsRepo.savePatient(patientTwo.toDatabasePatient())
 
@@ -126,10 +125,10 @@ class LocalRepositoryTest {
 
     @Test
     fun saveResults_twoPatientsThreeResults_equalToRepoData() = runBlocking {
-        val careTaker = CareTaker(1,"Vivek Gupta","itguru","9891417738",null)
+        val careTaker = CareTaker(1.toString(),"Vivek Gupta","itguru","9891417738",null)
         careTakerRepo.saveCareTaker(careTaker.toDatabaseCareTaker())
-        val patientOne = Patient(1,"Atharv Gupta",4,19.8f,"",1)
-        val patientTwo = Patient(2,"Utkarsh",7,24f,"",1)
+        val patientOne = Patient(1,"Atharv Gupta",4,19.8f,"",1.toString())
+        val patientTwo = Patient(2,"Utkarsh",7,24f,"",1.toString())
         patientsRepo.savePatient(patientOne.toDatabasePatient())
         patientsRepo.savePatient(patientTwo.toDatabasePatient())
 

@@ -9,20 +9,20 @@ import com.ruviapps.tacklingnephrotic.database.entities.TableName
 interface CareTakerDao {
 
    @Insert(onConflict = OnConflictStrategy.REPLACE)
-   suspend fun insertAllCareTakers(vararg databaseCareTaker: DatabaseCareTaker) : List<Long>
+   suspend fun insertAllCareTakers(vararg databaseCareTaker: DatabaseCareTaker)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-   suspend fun insertCareTaker(databaseCareTaker: DatabaseCareTaker) : Long
+   suspend fun insertCareTaker(databaseCareTaker: DatabaseCareTaker)
 
     @Query( "Select * from " + TableName.CaretakerTable)
    suspend fun getAllCareTakers(): List<DatabaseCareTaker>
 
     @Query("Select * from " +  TableName.CaretakerTable + " where "+ DatabaseCareTaker.ColumnCareTakerId + " = :id")
-    suspend fun getCareTakerById(id : Long) : DatabaseCareTaker
+    suspend fun getCareTakerById(id : String) : DatabaseCareTaker
 
     @Transaction
     @Query("Select * from " + TableName.CaretakerTable + " where " + DatabaseCareTaker.ColumnCareTakerId + " = :id")
-    suspend fun patientsOfCareTaker(id : Long) : List<CareTakerWithPatients>
+    suspend fun patientsOfCareTaker(id : String) : List<CareTakerWithPatients>
 
     @Query("Delete from ${TableName.CaretakerTable}")
     suspend fun deleteAllCareTaker()

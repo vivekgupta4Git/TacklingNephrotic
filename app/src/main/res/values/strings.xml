@@ -34,4 +34,6 @@
     <string name="user_role_care_taker_msg">I am Care Taker</string>
     <string name="user_role_patient_msg">I am Patient</string>
     <string name="fatal_error">Fatal Error !!</string>
+    <string name="invalid_user_exclaim">User is already Present</string>
+    <string name="skip">Skip</string>
 </resources>

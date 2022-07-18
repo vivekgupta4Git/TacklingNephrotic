@@ -55,7 +55,7 @@ class HomeViewModel @Inject constructor
 
     fun getEntryList(){
         viewModelScope.launch {
-            var p = Patient(0, "",0,0.0f,"", 0)
+            var p = Patient(0, "",0,0.0f,"", 0.toString())
             val pqery = patientUseCases.getPatientUseCases(1)
             pqery.onSuccess { data, _ ->
                 p =data.toDomainPatient()

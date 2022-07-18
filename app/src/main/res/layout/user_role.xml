@@ -118,7 +118,19 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/continueButton"
+        android:text="@string/fui_continue"
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:layout_margin="@dimen/extra_extra_large_dimen"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>
 
 </layout>

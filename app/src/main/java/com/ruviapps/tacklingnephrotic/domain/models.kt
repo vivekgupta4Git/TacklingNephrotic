@@ -9,10 +9,10 @@ data class Patient(
     val patientAge : Int?,
     val patientWeight : Float?,
     val patientPicUri : String = "",
-    val underCareTakerId: Long
+    val underCareTakerId: String
 )
 data class CareTaker(
-    val careTakerId : Long,
+    val careTakerId : String,
     val careTakerName : String?,
     val email : String?,
     val primaryContact:String,
