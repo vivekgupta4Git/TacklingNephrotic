@@ -24,7 +24,7 @@ import kotlin.math.log
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val resourcesProvider: AppModule.ResourcesProvider,
+    private val resourcesProvider: AppModule.ResourcesProvider
 ) : ViewModel() {
 
     private var _navigation = MutableLiveData< Event<NavigationCommand>>()
@@ -59,11 +59,8 @@ class LoginViewModel @Inject constructor(
         val  loginResponse= result.idpResponse
 
         if(result.resultCode == Activity.RESULT_OK){
-            if(loginResponse?.isNewUser == true){
-            _navigation.value =   Event(NavigationCommand.ToDirection(LoginFragmentDirections.actionNavLoginFragmentToNavUserRole()))
-            }
-            else
-                _navigation.value = Event(NavigationCommand.ToDirection(LoginFragmentDirections.actionNavLoginFragmentToNavResult()))
+            val action = LoginFragmentDirections.actionNavLoginFragmentToNavUserRole()
+            _navigation.value =   Event(NavigationCommand.ToDirection(action))
 
         }else
         {

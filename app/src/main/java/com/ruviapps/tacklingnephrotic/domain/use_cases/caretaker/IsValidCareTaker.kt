@@ -1,5 +1,6 @@
 package com.ruviapps.tacklingnephrotic.domain.use_cases.caretaker
 
+import android.util.Log
 import com.ruviapps.tacklingnephrotic.database.dto.onFailure
 import com.ruviapps.tacklingnephrotic.database.dto.onSuccess
 import com.ruviapps.tacklingnephrotic.repository.CareTakerLocalRepository
@@ -13,7 +14,7 @@ class IsValidCareTaker@Inject constructor(
     var validCareTaker = false
 
         qResult.onSuccess { data, _ ->
-            validCareTaker = data.ctId != id
+            validCareTaker = data.ctId.matches(id.toRegex())
         }
         qResult.onFailure { _, _ ->
             validCareTaker = false
