@@ -27,9 +27,9 @@ class UserRoleFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View{
         observerNavigation()
-        viewModel.verifyUser()
+       // viewModel.verifyUser()
 
         binding = UserRoleBinding.inflate(inflater, container, false)
         return binding.root
@@ -54,9 +54,22 @@ class UserRoleFragment : BaseFragment() {
 
         continueButton.setOnClickListener {
             if(pCard.isChecked || cTCard.isChecked)
-            viewModel.saveCareTaker()
+            {
+                if(pCard.isChecked){
+                 //user is also a patient
+                    //instead of saving details here, I should show user another screen to fill the necessary details like weight
+                    viewModel.savePatient()
+                }else
+                {
+                    //user is only a care taker to patient
+                    viewModel.saveCareTaker()
+                }
+            }else
+            {
+                //user hasn't selected any role
+                viewModel.showSnackBar()
+            }
         }
-
 
 
     }//end of onView Created

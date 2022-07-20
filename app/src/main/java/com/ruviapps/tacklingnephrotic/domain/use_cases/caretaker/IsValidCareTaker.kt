@@ -15,9 +15,12 @@ class IsValidCareTaker@Inject constructor(
 
         qResult.onSuccess { data, _ ->
             validCareTaker = data.ctId.matches(id.toRegex())
+            Log.d("verifyUser","validCareTaker = $validCareTaker  Data = $data")
         }
-        qResult.onFailure { _, _ ->
+        qResult.onFailure { msg, _ ->
             validCareTaker = false
+            Log.d("verifyUser","validCareTaker = $validCareTaker msg  = $msg" )
+
         }
 
         return validCareTaker

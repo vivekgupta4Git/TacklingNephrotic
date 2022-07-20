@@ -56,7 +56,7 @@
             android:id="@+id/alreadyLoginText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/already_have_an_account"
+            android:text="@string/use_another_login_method"
             app:layout_constraintEnd_toEndOf="@id/getStartedButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/getStartedButton" />

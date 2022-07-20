@@ -38,10 +38,10 @@ class RegisterCareTakerUseCase @Inject constructor(
         }
         val  careTaker = CareTaker(uid,name,email,primaryContact,secondaryContact)
 
-        if(! IsValidCareTaker(repository).invoke(uid))
+     /*   if(! IsValidCareTaker(repository).invoke(uid))
            return QueryResult.Error("Cannot save careTaker",
                VALIDATION_ERROR)
-
+*/
         return repository.saveCareTaker(careTaker.toDatabaseCareTaker())
     }
 
