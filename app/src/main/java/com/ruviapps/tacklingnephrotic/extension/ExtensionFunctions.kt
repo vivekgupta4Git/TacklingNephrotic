@@ -27,9 +27,10 @@ fun DatabaseCareTaker.toDomainCareTaker() : CareTaker {
 //extension function to convert list of  domain object to  list of database object
 fun List<CareTaker>.toDatabaseCareTaker() : List<DatabaseCareTaker>{
     return map{
-        val firstName= it.careTakerName?.substringBefore(" ") ?: "Default"
-        val lastName = it.careTakerName?.substringAfterLast(" ") ?: ""
-        val fullName =  FullName(firstName,lastName)
+        val posOfSpace = it.careTakerName?.indexOf(" ") ?: -1
+        val firstName= if(posOfSpace!=-1 )  it.careTakerName?.substring(0,posOfSpace) else it.careTakerName
+        val lastName = if(posOfSpace!=-1) it.careTakerName?.substring(posOfSpace+1) else  " "
+        val fullName  = if(firstName!=null) FullName(firstName,lastName) else FullName("Default","")
 
         val email = it.email ?: ""
         val primaryContact = it.primaryContact
@@ -41,9 +42,11 @@ fun List<CareTaker>.toDatabaseCareTaker() : List<DatabaseCareTaker>{
 
 //extension function to convert   domain object to database object
 fun CareTaker.toDatabaseCareTaker() : DatabaseCareTaker{
-    val firstName= careTakerName?.substringBefore(" ") ?: careTakerName
-    val lastName = careTakerName?.substringAfterLast(" ") ?: ""
-    val fullName =  FullName(firstName!!,lastName)          //if first name is null, We throw NPE
+    val posOfSpace = careTakerName?.indexOf(" ") ?: -1
+    val firstName= if(posOfSpace!=-1 )  careTakerName?.substring(0,posOfSpace) else careTakerName
+    val lastName = if(posOfSpace!=-1) careTakerName?.substring(posOfSpace+1) else  " "
+
+    val fullName  = if(firstName!=null) FullName(firstName,lastName) else FullName("Default","")
 
     val primaryContact = primaryContact
     val secondaryContact = secondaryContact
@@ -55,8 +58,9 @@ fun CareTaker.toDatabaseCareTaker() : DatabaseCareTaker{
 
 //extension function to convert patient domain object to database object
 fun Patient.toDatabasePatient() : DatabasePatient{
-    val firstName= patientName.substringBefore(" ")
-    val lastName = patientName.substringAfterLast(" ")
+    val posOfSpace = patientName.indexOf(" ")
+    val firstName= if(posOfSpace!=-1 )  patientName.substring(0,posOfSpace) else patientName
+    val lastName = if(posOfSpace!=-1) patientName.substring(posOfSpace+1) else  " "
     val fullName =  FullName(firstName,lastName)          //if first name is null, We throw NPE
 
     return DatabasePatient(patientId,
@@ -71,8 +75,9 @@ fun Patient.toDatabasePatient() : DatabasePatient{
 fun List<Patient>.toDatabasePatient() : List<DatabasePatient>{
 
     return map {
-        val firstName= it.patientName.substringBefore(" ")
-        val lastName = it.patientName.substringAfterLast(" ")
+        val posOfSpace = it.patientName.indexOf(" ")
+        val firstName= if(posOfSpace!=-1 )  it.patientName.substring(0,posOfSpace) else it.patientName
+        val lastName = if(posOfSpace!=-1) it.patientName.substring(posOfSpace+1) else  " "
         val fullName =  FullName(firstName,lastName)          //if first name is null, We throw NPE
 
         DatabasePatient(it.patientId,
@@ -87,8 +92,8 @@ fun List<Patient>.toDatabasePatient() : List<DatabasePatient>{
 //extension function to convert database patient object into domain patient object
 fun DatabasePatient.toDomainPatient() : Patient{
 
-    val firstName = fullName?.firstName
-    val lastName = fullName?.lastName
+    val firstName = fullName?.firstName ?: ""
+    val lastName = fullName?.lastName ?: ""
     val patientName = "$firstName $lastName"
 
     return Patient(
@@ -105,8 +110,8 @@ fun DatabasePatient.toDomainPatient() : Patient{
 //extension function to convert List of Patient Database Objects to list of domain Patient Objects
 fun List<DatabasePatient>.toDomainPatient() : List<Patient>{
     return map{
-        val firstName = it.fullName?.firstName
-        val lastName = it.fullName?.lastName
+        val firstName = it.fullName?.firstName ?: ""
+        val lastName = it.fullName?.lastName ?: ""
         val patientName = "$firstName $lastName"
 
         Patient(

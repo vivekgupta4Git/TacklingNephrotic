@@ -26,7 +26,7 @@ class UserRoleViewModel @Inject constructor(
 
     private val auth = AuthUI.getInstance().auth
     private val firebaseUser =   auth.currentUser
-    private val uid = firebaseUser?.uid.toString()
+    private val uid = firebaseUser?.uid ?: ""
 
     private var _navigation = MutableLiveData<Event<NavigationCommand>>()
     val navigation : LiveData<Event<NavigationCommand>>
@@ -37,12 +37,12 @@ class UserRoleViewModel @Inject constructor(
     }
 
     fun saveCareTaker(){
-        //we have already stored user details to db we don't need to do anything else
-        //in future I could let user fill its profile but at present I see it as bad user experience
-     _navigation.value = Event(NavigationCommand.ToDirection(UserRoleFragmentDirections.actionNavUserRoleToNavResult()))
-        //instead of navigating to reading screen, I should let user add patient first or open dashboard ,
-    // where I will notify user to add patient first before using this app
-    }
+        //we already have saved user details as careTaker , so no need to do anything but
+        //we need patient details before using app, so navigating user to save Patient screen
+     _navigation.value = Event(NavigationCommand
+         .ToDirection(UserRoleFragmentDirections
+         .actionNavUserRoleToNavGallery()))
+       }
 
     fun savePatient(){
         //user is also a patient, we will use caretaker details as patient
@@ -51,13 +51,17 @@ class UserRoleViewModel @Inject constructor(
     withContext(this.coroutineContext){
         val query =
             patientUseCases.addPatientUseCase(patientName = name,
-                patientAge = null,
+                patientAge = 1,
                 patientWeight = 1f ,            /*  by default using 1f as a weight */
                 patientPicUri = "",
                 underCareTakerId = uid )
-        query.onSuccess { _, _ ->
+        query.onSuccess { userId, _ ->
             _navigation.value =
-                Event(NavigationCommand.ToDirection(UserRoleFragmentDirections.actionNavUserRoleToNavResult()))
+                Event(NavigationCommand
+                    .ToDirection(UserRoleFragmentDirections
+                        .actionNavUserRoleToNavResult(
+                            userId
+                        )))
                     }
 
         query.onFailure { message, _ ->

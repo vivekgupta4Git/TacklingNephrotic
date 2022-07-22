@@ -96,7 +96,7 @@ class LoginViewModel @Inject constructor(
     }
 
     private suspend fun saveCareTaker() {
-        var uid = ""
+        val uid: String
         val auth = AuthUI.getInstance().auth
         val firebaseUser : FirebaseUser? =   auth.currentUser
 
@@ -121,7 +121,9 @@ class LoginViewModel @Inject constructor(
                 careTakerUseCases.registerCareTakerUseCase(uid, name, email, phoneString, "")
             query.onSuccess { _, _ ->
                 _navigation.value =
-                    Event(NavigationCommand.ToDirection(LoginFragmentDirections.actionNavLoginFragmentToNavUserRole()))
+                    Event(NavigationCommand
+                        .ToDirection(
+                            LoginFragmentDirections.actionNavLoginFragmentToNavUserRole()))
             }
 
             query.onFailure { message, _ ->

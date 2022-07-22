@@ -4,40 +4,51 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ObservableField
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.firebase.ui.auth.AuthUI
+import com.ruviapps.tacklingnephrotic.R
 import com.ruviapps.tacklingnephrotic.databinding.FragmentGalleryBinding
+import com.ruviapps.tacklingnephrotic.domain.Patient
 import com.ruviapps.tacklingnephrotic.ui.test_result.BaseFragment
+import com.ruviapps.tacklingnephrotic.utility.NavigationCommand
+import com.ruviapps.tacklingnephrotic.utility.observeAndHandleEvent
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class GalleryFragment : BaseFragment() {
 
-    private var _binding: FragmentGalleryBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    override var bottomAppBarVisibility: Int = View.GONE
+    override var fabVisibility: Int = View.GONE
+    private lateinit var _binding: FragmentGalleryBinding
+    private  val galleryViewModel: GalleryViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
-        val galleryViewModel =
-            ViewModelProvider(this).get(GalleryViewModel::class.java)
-
         _binding = FragmentGalleryBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textGallery
-        galleryViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        return _binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val uid = AuthUI.getInstance().auth.currentUser?.uid ?: ""
+        _binding.newPatient = Patient(0,"",1,0f,"",uid)
+        _binding.viewModel = galleryViewModel
+        _binding.lifecycleOwner = this
+
+      galleryViewModel.navigation.observeAndHandleEvent(this)
+
+
     }
+
+
 }
+

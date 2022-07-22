@@ -5,13 +5,14 @@ import androidx.room.ForeignKey.Companion.CASCADE
 import java.time.LocalDate
 import java.util.*
 
-@Entity(tableName = TableName.UrineResultTable, foreignKeys = [
+@Entity(tableName = TableName.UrineResultTable,
+    primaryKeys = [UrineResult.ColumnRecordedDate,UrineResult.ColumnPatientId] , //composite primary key
+    foreignKeys = [
     ForeignKey(entity = DatabasePatient::class,
     parentColumns = [DatabasePatient.ColumnPatientId],
     childColumns = [UrineResult.ColumnPatientId],
     onDelete = CASCADE)])
 data class UrineResult(
-    @PrimaryKey(false)
     @ColumnInfo(ColumnRecordedDate, defaultValue = "'CURRENT_TIMESTAMP'")
     val recordedDate : LocalDate,
     @ColumnInfo(ColumnResultCode)

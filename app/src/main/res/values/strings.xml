@@ -37,4 +37,7 @@
     <string name="invalid_user_exclaim">User is already Present</string>
     <string name="skip">Skip</string>
     <string name="select_any_one">Please select your role</string>
+    <string name="error_name">Name Cannot be null</string>
+    <string name="error_weight">Weight Cannot be null</string>
+    <string name="error_weight_negative">Weight Cannot be Negative</string>
 </resources>

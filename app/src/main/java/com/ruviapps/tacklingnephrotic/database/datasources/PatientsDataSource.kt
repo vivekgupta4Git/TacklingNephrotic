@@ -2,6 +2,7 @@ package com.ruviapps.tacklingnephrotic.database.datasources
 
 import com.ruviapps.tacklingnephrotic.database.dto.QueryResult
 import com.ruviapps.tacklingnephrotic.database.entities.*
+import com.ruviapps.tacklingnephrotic.domain.Patient
 
 interface PatientsDataSource {
 

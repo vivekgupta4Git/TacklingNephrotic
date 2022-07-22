@@ -1,5 +1,6 @@
 package com.ruviapps.tacklingnephrotic.di.module.usecasemodule
 
+import com.ruviapps.tacklingnephrotic.di.module.AppModule
 import com.ruviapps.tacklingnephrotic.domain.use_cases.caretaker.*
 import com.ruviapps.tacklingnephrotic.domain.use_cases.patient.AddPatientUseCase
 import com.ruviapps.tacklingnephrotic.domain.use_cases.patient.GetPatientUseCase
@@ -42,9 +43,9 @@ object UseCaseModule {
 
     @Provides
     @ActivityScoped
-    fun providesPatientUseCase(repo: PatientLocalRepository) : PatientUseCases{
+    fun providesPatientUseCase(repo: PatientLocalRepository,resourcesProvider: AppModule.ResourcesProvider) : PatientUseCases{
         return PatientUseCases(
-            addPatientUseCase = AddPatientUseCase(repo),
+            addPatientUseCase = AddPatientUseCase(repo,resourcesProvider),
             removePatientUseCase = RemovePatientUseCase(repo),
             getPatientUseCases = GetPatientUseCase(repo)
         )

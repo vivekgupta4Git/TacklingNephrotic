@@ -17,6 +17,7 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.ruviapps.tacklingnephrotic.BuildConfig
 import com.ruviapps.tacklingnephrotic.database.entities.ResultCode
 import com.ruviapps.tacklingnephrotic.databinding.ReadingSliderBinding
@@ -31,6 +32,9 @@ import java.util.*
 
 @AndroidEntryPoint
 class ResultPickerFragment : BaseFragment() {
+
+    val args : ResultPickerFragmentArgs by navArgs()
+
     override var bottomAppBarVisibility: Int = View.GONE
     override var fabVisibility: Int = View.GONE
     companion object {
@@ -261,7 +265,7 @@ class ResultPickerFragment : BaseFragment() {
                 viewModel.saveResult(TestResult(LocalDate.now(),
                     saveReading,
                     "",
-                    1))
+                    args.patientId))
 
             }
         }

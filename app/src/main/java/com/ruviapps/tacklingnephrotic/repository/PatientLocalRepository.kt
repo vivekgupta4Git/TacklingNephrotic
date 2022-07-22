@@ -10,8 +10,8 @@ import com.ruviapps.tacklingnephrotic.utility.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.lang.Exception
 import javax.inject.Inject
+import kotlin.Exception
 
 class PatientLocalRepository @Inject constructor(
     val patientDao: PatientDao,
@@ -82,4 +82,6 @@ class PatientLocalRepository @Inject constructor(
             }
         }
     }
+
+
 }

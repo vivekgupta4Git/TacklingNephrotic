@@ -15,8 +15,8 @@ data class DatabasePatient(
     @ColumnInfo(ColumnPatientId)
     val patientId : Long,
     @Embedded val fullName : FullName?,
-    val age : Int?,
-    val weight: Float?,
+    val age : Int,
+    val weight: Float,
     @ColumnInfo("snap_uri")
     val snapUri : String = "",
     @ColumnInfo(ColumnPatientCareTakerId,index=true)

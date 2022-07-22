@@ -1,22 +1,25 @@
 package com.ruviapps.tacklingnephrotic.domain
 
+
 import java.time.LocalDate
 import java.util.*
 
+//changing val to var to enable two-way data binding
 data class Patient(
-    val patientId : Long,
-    val patientName : String,
-    val patientAge : Int?,
-    val patientWeight : Float?,
-    val patientPicUri : String = "",
-    val underCareTakerId: String
+    var patientId : Long,
+    var patientName : String,
+    var patientAge : Int,
+    var patientWeight : Float,
+    var patientPicUri : String = "",
+    var underCareTakerId: String
 )
+
 data class CareTaker(
-    val careTakerId : String,
-    val careTakerName : String?,
-    val email : String?,
-    val primaryContact:String,
-    val secondaryContact:String?
+    var careTakerId : String,
+    var careTakerName : String?,
+    var email : String?,
+    var primaryContact:String,
+    var secondaryContact:String?
 )
 
 

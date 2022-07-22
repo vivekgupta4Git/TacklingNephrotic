@@ -26,3 +26,5 @@ sealed class NavigationCommand {
      */
     data class ShowError(val errMsg : String?) : NavigationCommand()
 }
+
+

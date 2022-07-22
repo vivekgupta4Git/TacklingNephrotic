@@ -21,6 +21,7 @@ import com.ruviapps.tacklingnephrotic.ui.login.BottomSheet
 import com.ruviapps.tacklingnephrotic.ui.login.LoginViewModel.*
 import com.ruviapps.tacklingnephrotic.utility.BaseFragment
 import com.ruviapps.tacklingnephrotic.utility.NavigationCommand
+import com.ruviapps.tacklingnephrotic.utility.observeAndHandleEvent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.log
 
@@ -42,21 +43,7 @@ class LoginFragment : BaseFragment() {
 
 
     private fun observeNavigation(){
-        viewModel.navigation.observe(viewLifecycleOwner) { event ->
-            event.getContentIfNotHandled()?.let { command ->
-                when (command) {
-                    is NavigationCommand.ToDirection ->
-                        findNavController().navigate(command.directions)
-                    is NavigationCommand.ShowError -> {
-                        Toast.makeText(requireContext(), command.errMsg, Toast.LENGTH_SHORT).show()
-                    }
-                    else -> {
-
-                    }
-                }
-            }
-        }
-
+    viewModel.navigation.observeAndHandleEvent(this)
     }
 
 
