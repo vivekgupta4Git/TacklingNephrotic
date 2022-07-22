@@ -2,12 +2,10 @@ package com.ruviapps.tacklingnephrotic.ui.login
 
 import android.app.Activity
 import android.content.Intent
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.facebook.login.Login
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
@@ -16,19 +14,21 @@ import com.ruviapps.tacklingnephrotic.R
 import com.ruviapps.tacklingnephrotic.database.dto.onFailure
 import com.ruviapps.tacklingnephrotic.database.dto.onSuccess
 import com.ruviapps.tacklingnephrotic.di.module.AppModule
+import com.ruviapps.tacklingnephrotic.domain.Patient
 import com.ruviapps.tacklingnephrotic.domain.use_cases.caretaker.CareTakerUseCases
+import com.ruviapps.tacklingnephrotic.domain.use_cases.patient.PatientUseCases
 import com.ruviapps.tacklingnephrotic.utility.Event
 import com.ruviapps.tacklingnephrotic.utility.NavigationCommand
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import kotlin.math.log
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val resourcesProvider: AppModule.ResourcesProvider
-) : ViewModel() {
+    private val resourcesProvider: AppModule.ResourcesProvider,
+    private val patientUseCases: PatientUseCases
+    ) : ViewModel() {
 
     @Inject
     lateinit var careTakerUseCases : CareTakerUseCases
@@ -60,6 +60,17 @@ class LoginViewModel @Inject constructor(
             .build()
     }
 
+    private val patientList = mutableListOf<Patient>()
+  //a suspend function for retrieving all the patients under care taking of current user
+    private suspend fun getAllPatientForCareTaker(uid : String){
+                val query = patientUseCases.getAllPatientForCareTakerUseCase(uid)
+                query.onSuccess { data, _ ->
+                    patientList.addAll(data)
+            }
+    }
+
+
+
 
     fun handleResult(result : FirebaseAuthUIAuthenticationResult){
         val  loginResponse= result.idpResponse
@@ -71,8 +82,33 @@ class LoginViewModel @Inject constructor(
                 if(loginResponse!=null && loginResponse.isNewUser){
                     saveCareTaker()
                 }
-                else
-                    _navigation.value = Event(NavigationCommand.ToDirection(LoginFragmentDirections.actionNavLoginFragmentToNavResult()))
+                else {
+                 //user is not new
+                    val uid = AuthUI.getInstance().auth.currentUser?.uid ?: ""
+             //by using withContext ,we are letting the result to be produced first
+                   withContext(this.coroutineContext) {
+                       getAllPatientForCareTaker(uid)
+                   }
+                //if only one patient is under care taking of user then , no need to show another screen
+                    //just navigate to userReading screen with patient id found
+                    if(patientList.size in 1..1) {
+                        _navigation.value =
+                            Event(NavigationCommand
+                                .ToDirection(LoginFragmentDirections
+                                    .actionNavLoginFragmentToNavResult(
+                                        patientList[0].patientId)
+                                ))
+                    }else{
+                        //if no patient found
+                       if(patientList.isEmpty())
+                        _navigation.value = Event(NavigationCommand
+                            .ToDirection(LoginFragmentDirections.actionNavLoginFragmentToNavUserRole()))
+                        else if(patientList.size>1){
+                            //show user another screen consisting of list of patient
+                            //user can select any one of the patient to get started.
+                        }
+                    }
+                }
             }
         }else
         {

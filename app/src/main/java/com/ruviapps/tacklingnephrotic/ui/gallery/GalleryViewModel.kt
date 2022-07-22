@@ -33,13 +33,13 @@ class GalleryViewModel @Inject constructor(private val patientUseCases: PatientU
                     patient.patientWeight,
                     patient.patientPicUri,
                     patient.underCareTakerId)
-                query.onSuccess { userId, _ ->
+                query.onSuccess { patientId, _ ->
                     _insertionComplete.value = true
                     _navigation.value =
                         Event(NavigationCommand
                             .ToDirection(GalleryFragmentDirections
                                 .actionNavGalleryToNavResult(
-                                    userId
+                                    patientId
                                 )))
                 }
                 query.onFailure { message, _ ->

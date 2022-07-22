@@ -55,12 +55,12 @@ class UserRoleViewModel @Inject constructor(
                 patientWeight = 1f ,            /*  by default using 1f as a weight */
                 patientPicUri = "",
                 underCareTakerId = uid )
-        query.onSuccess { userId, _ ->
+        query.onSuccess { patientId, _ ->
             _navigation.value =
                 Event(NavigationCommand
                     .ToDirection(UserRoleFragmentDirections
                         .actionNavUserRoleToNavResult(
-                            userId
+                            patientId
                         )))
                     }
 

@@ -5,5 +5,6 @@ import javax.inject.Inject
 data class PatientUseCases @Inject constructor(
     val addPatientUseCase: AddPatientUseCase,
     val removePatientUseCase: RemovePatientUseCase,
-    val getPatientUseCases: GetPatientUseCase
+    val getPatientUseCases: GetPatientUseCase,
+    val getAllPatientForCareTakerUseCase: GetAllPatientForCareTakerUseCase
 )

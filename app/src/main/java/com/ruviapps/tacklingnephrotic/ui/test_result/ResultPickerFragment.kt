@@ -23,6 +23,7 @@ import com.ruviapps.tacklingnephrotic.database.entities.ResultCode
 import com.ruviapps.tacklingnephrotic.databinding.ReadingSliderBinding
 import com.ruviapps.tacklingnephrotic.domain.TestResult
 import com.ruviapps.tacklingnephrotic.utility.NavigationCommand
+import com.ruviapps.tacklingnephrotic.utility.observeAndHandleEvent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.io.File
@@ -163,7 +164,8 @@ class ResultPickerFragment : BaseFragment() {
         initializedBinding()
 
 
-
+        viewModel.navigateToDashBoard.observeAndHandleEvent(this)
+/*
         viewModel.navigateToDashBoard.observe(viewLifecycleOwner) { event ->
             event.getContentIfNotHandled()?.let { command ->
                 when (command) {
@@ -176,6 +178,7 @@ class ResultPickerFragment : BaseFragment() {
                 }
             }
         }
+*/
 
 
         val container = binding.constraintLayoutContainer

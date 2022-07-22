@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.ruviapps.tacklingnephrotic.databinding.UserRoleBinding
 import com.ruviapps.tacklingnephrotic.utility.BaseFragment
 import com.ruviapps.tacklingnephrotic.utility.NavigationCommand
+import com.ruviapps.tacklingnephrotic.utility.observeAndHandleEvent
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -29,8 +30,6 @@ class UserRoleFragment : BaseFragment() {
         savedInstanceState: Bundle?,
     ): View{
         observerNavigation()
-       // viewModel.verifyUser()
-
         binding = UserRoleBinding.inflate(inflater, container, false)
         return binding.root
 
@@ -75,22 +74,6 @@ class UserRoleFragment : BaseFragment() {
     }//end of onView Created
 
     private fun observerNavigation() {
-        viewModel.navigation.observe(viewLifecycleOwner) { event ->
-            event.getContentIfNotHandled().let { navigationCommand ->
-                when (navigationCommand) {
-                    is NavigationCommand.ToDirection ->
-                        findNavController().navigate(navigationCommand.directions)
-                    is NavigationCommand.ShowError -> {
-                        Toast.makeText(requireContext(),
-                            navigationCommand.errMsg,
-                            Toast.LENGTH_SHORT).show()
-                    }
-                    else -> {
-
-                    }
-
-                }
-            }
-        }
+        viewModel.navigation.observeAndHandleEvent(this)
     }
 }

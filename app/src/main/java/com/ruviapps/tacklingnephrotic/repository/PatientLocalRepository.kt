@@ -1,11 +1,14 @@
 package com.ruviapps.tacklingnephrotic.repository
 
+import android.util.Log
 import com.ruviapps.tacklingnephrotic.database.dao.PatientDao
 import com.ruviapps.tacklingnephrotic.database.datasources.PatientsDataSource
 import com.ruviapps.tacklingnephrotic.database.dto.QueryResult
 import com.ruviapps.tacklingnephrotic.database.entities.DatabasePatient
 import com.ruviapps.tacklingnephrotic.database.entities.PatientWithConsultations
 import com.ruviapps.tacklingnephrotic.database.entities.PatientWithUrineResults
+import com.ruviapps.tacklingnephrotic.domain.Patient
+import com.ruviapps.tacklingnephrotic.extension.toDomainPatient
 import com.ruviapps.tacklingnephrotic.utility.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -83,5 +86,14 @@ class PatientLocalRepository @Inject constructor(
         }
     }
 
+    override suspend fun getAllPatientForCareTaker(careTakerId: String): QueryResult<List<Patient>> {
+    return withContext(ioDispatcher){
+        try {
+            QueryResult.Success(patientDao.getAllPatientForCareTaker(careTakerId).toDomainPatient())
+        }catch (ex : Exception){
+            QueryResult.Error(ex.localizedMessage)
+        }
+    }
+    }
 
 }

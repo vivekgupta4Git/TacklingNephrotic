@@ -5,6 +5,7 @@ import com.ruviapps.tacklingnephrotic.database.entities.DatabasePatient
 import com.ruviapps.tacklingnephrotic.database.entities.PatientWithConsultations
 import com.ruviapps.tacklingnephrotic.database.entities.PatientWithUrineResults
 import com.ruviapps.tacklingnephrotic.database.entities.TableName
+import com.ruviapps.tacklingnephrotic.domain.Patient
 
 @Dao
 interface PatientDao {
@@ -44,4 +45,6 @@ interface PatientDao {
     @Query("Select * from ${TableName.PatientTable} where ${DatabasePatient.ColumnPatientId} = :id")
     suspend fun getAdvicesForPatient(id : Long) : List<PatientWithConsultations>
 
+    @Query("Select * from ${TableName.PatientTable} where ${DatabasePatient.ColumnPatientCareTakerId} = :id")
+    suspend fun getAllPatientForCareTaker(id : String) : List<DatabasePatient>
 }

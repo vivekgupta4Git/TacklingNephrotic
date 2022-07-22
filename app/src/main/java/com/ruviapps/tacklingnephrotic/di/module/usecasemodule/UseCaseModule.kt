@@ -2,10 +2,7 @@ package com.ruviapps.tacklingnephrotic.di.module.usecasemodule
 
 import com.ruviapps.tacklingnephrotic.di.module.AppModule
 import com.ruviapps.tacklingnephrotic.domain.use_cases.caretaker.*
-import com.ruviapps.tacklingnephrotic.domain.use_cases.patient.AddPatientUseCase
-import com.ruviapps.tacklingnephrotic.domain.use_cases.patient.GetPatientUseCase
-import com.ruviapps.tacklingnephrotic.domain.use_cases.patient.PatientUseCases
-import com.ruviapps.tacklingnephrotic.domain.use_cases.patient.RemovePatientUseCase
+import com.ruviapps.tacklingnephrotic.domain.use_cases.patient.*
 import com.ruviapps.tacklingnephrotic.domain.use_cases.result.*
 import com.ruviapps.tacklingnephrotic.domain.use_cases.stateCalculator.CalculateStateFromReadingUseCase
 import com.ruviapps.tacklingnephrotic.domain.use_cases.stateCalculator.CalculateStateUseCases
@@ -47,7 +44,8 @@ object UseCaseModule {
         return PatientUseCases(
             addPatientUseCase = AddPatientUseCase(repo,resourcesProvider),
             removePatientUseCase = RemovePatientUseCase(repo),
-            getPatientUseCases = GetPatientUseCase(repo)
+            getPatientUseCases = GetPatientUseCase(repo),
+            getAllPatientForCareTakerUseCase = GetAllPatientForCareTakerUseCase(repo)
         )
     }
 
