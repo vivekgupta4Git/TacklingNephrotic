@@ -13,11 +13,9 @@ import android.widget.ScrollView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.cardview.widget.CardView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.FileProvider
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageView
@@ -26,8 +24,6 @@ import com.ruviapps.tacklingnephrotic.BuildConfig
 import com.ruviapps.tacklingnephrotic.database.entities.ResultCode
 import com.ruviapps.tacklingnephrotic.databinding.ReadingSliderBinding
 import com.ruviapps.tacklingnephrotic.domain.TestResult
-import com.ruviapps.tacklingnephrotic.utility.CropImageContract2
-import com.ruviapps.tacklingnephrotic.utility.NavigationCommand
 import com.ruviapps.tacklingnephrotic.utility.observeAndHandleEvent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -81,7 +77,7 @@ class ResultPickerFragment : BaseFragment() {
             }
         }
     }
-    private val cropImage = registerForActivityResult(CropImageContract2()) { result ->
+    private val cropImage = registerForActivityResult(CropImageContract()) { result ->
         if (result.isSuccessful) {
             // use the returned uri
                 imageCollection.forEach {

@@ -13,12 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TacklingNephrotic">
-        <activity android:name=".utility.CropImageActivity2"
-            android:exported="false"
-            android:label="@string/app_name"
-            />
-
-        <activity
+        <activity android:name="com.canhub.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
+      <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
