@@ -1,6 +1,7 @@
 package com.ruviapps.tacklingnephrotic.ui.test_result
 
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,10 +19,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageView
+import com.canhub.cropper.options
 import com.ruviapps.tacklingnephrotic.BuildConfig
 import com.ruviapps.tacklingnephrotic.database.entities.ResultCode
 import com.ruviapps.tacklingnephrotic.databinding.ReadingSliderBinding
 import com.ruviapps.tacklingnephrotic.domain.TestResult
+import com.ruviapps.tacklingnephrotic.utility.CropImageContract2
 import com.ruviapps.tacklingnephrotic.utility.NavigationCommand
 import com.ruviapps.tacklingnephrotic.utility.observeAndHandleEvent
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,19 +69,42 @@ class ResultPickerFragment : BaseFragment() {
 
     private val takePictureContract = registerForActivityResult(ActivityResultContracts.TakePicture()) { taken ->
         if (taken) {
-
-            latestImageUri.let { uri->
+          /*  latestImageUri.let { uri->
                 imageCollection.forEach {
                     it.visibility = View.VISIBLE
                     it.setImageURI(uri)
                 }
-            }
+            }*/
         }else{
             imageCollection.forEach {
                 it.visibility = View.GONE
             }
         }
     }
+    private val cropImage = registerForActivityResult(CropImageContract2()) { result ->
+        if (result.isSuccessful) {
+            // use the returned uri
+                imageCollection.forEach {
+                    it.visibility= View.VISIBLE
+                    it.setImageURI(result.uriContent)
+                }
+
+        // val uriContent = result.uriContent
+           // val uriFilePath = result.getUriFilePath(context) // optional usage
+        } else {
+            // an error occurred
+            val exception = result.error
+        }
+    }
+    private fun crop(){
+        cropImage.launch(
+            options {
+                setGuidelines(CropImageView.Guidelines.ON)
+                setOutputCompressFormat(Bitmap.CompressFormat.PNG)
+            }
+        )
+    }
+
     /*    latestImageUri.let {
             firstCardPreviewImage.visibility = View.VISIBLE
             secondCardPreviewImage.visibility = View.VISIBLE
@@ -112,9 +140,8 @@ class ResultPickerFragment : BaseFragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = ReadingSliderBinding.inflate(layoutInflater)
-
-    //    viewModel.initializeDatabase()
         return binding.root
+
     }
 
 
@@ -241,7 +268,8 @@ class ResultPickerFragment : BaseFragment() {
 
             val cameraButton = binding.cameraButton
             cameraButton.setOnClickListener {
-                takePicture()
+           //     takePicture()
+                crop()
             }
 
             val clearSelectionButton = binding.clearSelectionButton

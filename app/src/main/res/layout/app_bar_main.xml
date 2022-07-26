@@ -11,7 +11,15 @@
 
     <include layout="@layout/content_main"/>
 
-    <com.google.android.material.bottomappbar.BottomAppBar
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/bottomAppBar"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary" />
+
+
+   <!-- <com.google.android.material.bottomappbar.BottomAppBar
         app:hideOnScroll="true"
         android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
@@ -19,10 +27,10 @@
         android:layout_gravity="bottom"
         style="@style/Widget.MaterialComponents.BottomAppBar.PrimarySurface"
         app:navigationIcon="@drawable/ic_menu_24"
-        app:menu="@menu/activity_main_drawer">
+        app:menu="@menu/crop_image_menu">
 
     </com.google.android.material.bottomappbar.BottomAppBar>
-
+-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         app:layout_anchor="@id/bottomAppBar"
