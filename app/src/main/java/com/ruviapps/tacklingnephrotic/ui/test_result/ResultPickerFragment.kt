@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -90,6 +91,10 @@ class ResultPickerFragment : BaseFragment() {
         } else {
             // an error occurred
             val exception = result.error
+            Log.d("ruviApps","$exception")
+            imageCollection.forEach{
+                it.visibility = View.INVISIBLE
+            }
         }
     }
     private fun crop(){
@@ -439,6 +444,7 @@ class ResultPickerFragment : BaseFragment() {
             }
         }
     }
+
     private fun getTmpPicture() : Uri?{
         val tmpFile = File.createTempFile(Calendar.getInstance().timeInMillis.toString(),".jpeg",requireContext().cacheDir).apply {
             createNewFile()

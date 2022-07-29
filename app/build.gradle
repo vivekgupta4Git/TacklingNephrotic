@@ -55,8 +55,11 @@ android {
 
 
 dependencies {
+//cropper
     def version = "4.3.1"
     implementation "com.github.CanHub:Android-Image-Cropper:${version}"
+//picasso 
+    implementation 'com.squareup.picasso:picasso:2.8'
 
 
     // Import the BoM for the Firebase platform

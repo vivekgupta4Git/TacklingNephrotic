@@ -2,15 +2,11 @@
 <layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <data>
+<data>
     <variable
-        name="NewPatient"
-        type="com.ruviapps.tacklingnephrotic.domain.Patient" />
-        <variable
-            name="viewModel"
-            type="com.ruviapps.tacklingnephrotic.ui.gallery.GalleryViewModel" />
-    </data>
+        name="viewModel"
+        type="com.ruviapps.tacklingnephrotic.ui.gallery.GalleryViewModel" />
+</data>
 
     <ScrollView
     android:fillViewport="true"
@@ -20,7 +16,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
 
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".ui.gallery.GalleryFragment">
 
     <com.google.android.material.textview.MaterialTextView
@@ -30,25 +26,36 @@
         android:layout_marginTop="@dimen/largeDimen"
         android:layout_marginStart="@dimen/largeDimen"
         android:layout_marginEnd="@dimen/largeDimen"
-        android:text="Enter Patient Details"
+        android:text="@string/enter_patient_details"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/patientProfilePic"
+        <com.google.android.material.imageview.ShapeableImageView
         android:src="@mipmap/patient"
+        android:id="@+id/patientProfilePic"
         android:layout_marginTop="@dimen/extra_extra_large_dimen"
         app:layout_constraintTop_toBottomOf="@+id/text_gallery"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:shapeAppearance="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
-        android:layout_width="300dp"
-        android:layout_height="300dp"/>
+        android:layout_width="200dp"
+        android:layout_height="200dp"/>
+
+        <ImageButton
+            android:id="@+id/profileUploadButton"
+            app:layout_constraintTop_toBottomOf="@id/patientProfilePic"
+            android:backgroundTint="@color/material_on_background_emphasis_medium"
+            android:contentDescription="@string/change_profile_pic"
+            android:src="@drawable/ic_baseline_cloud_upload_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/patientProfilePic" />
     <com.google.android.material.card.MaterialCardView
-        app:layout_constraintTop_toBottomOf="@+id/patientProfilePic"
+        app:layout_constraintTop_toBottomOf="@+id/profileUploadButton"
         android:id="@+id/materialCardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -68,28 +75,29 @@
                 android:id="@+id/patientName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Patient Name"
+                android:hint="@string/patient_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:text="@={NewPatient.patientName}"
+                    android:text="@={viewModel.patient.patientName}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/patientAge"
+                android:hint="@string/patient_age"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Patient Age"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/patientName">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:text="@={`` + NewPatient.patientAge}"
+                    android:id="@+id/patientAgeEdit"
+                    android:text="@={`` + viewModel.patient.patientAge}"
                     android:inputType="numberSigned"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -99,32 +107,35 @@
                 android:id="@+id/patientWeight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Patient Weight"
+                android:hint="@string/patient_weight"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/patientAge">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:text="@={`` + NewPatient.patientWeight}"
+                    android:id="@+id/patientWeightEdit"
+                    android:text="@={`` + viewModel.patient.patientWeight}"
                     android:inputType="numberDecimal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.button.MaterialButton
+                android:onClick="@{ ()-> viewModel.savePatientDetails()}"
+                android:id="@+id/savePatientButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/largeDimen"
+                android:text="@string/fui_continue"
+                app:layout_constraintTop_toBottomOf="@id/patientWeight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.button.MaterialButton
-        android:onClick="@{ ()-> viewModel.savePatientDetails(NewPatient)}"
-        android:id="@+id/materialButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/largeDimen"
-        android:text="@string/fui_continue"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
 

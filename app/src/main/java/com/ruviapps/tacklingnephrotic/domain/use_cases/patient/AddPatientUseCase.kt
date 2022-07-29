@@ -18,7 +18,7 @@ class AddPatientUseCase @Inject constructor(
     suspend operator fun invoke  (
         patientName : String,
         patientAge : Int,
-        patientWeight : Float?,
+        patientWeight : Float,
         patientPicUri : String = "",
         underCareTakerId: String
     ) : QueryResult<Long>
@@ -26,12 +26,16 @@ class AddPatientUseCase @Inject constructor(
         if(patientName.isEmpty()||patientName.isBlank())
             return QueryResult.Error(resourcesProvider.getString(R.string.error_name),VALIDATION_ERROR)
 
-        if(patientWeight==null){
+       /* if(patientWeight==null){
             return QueryResult.Error(resourcesProvider.getString(R.string.error_weight), VALIDATION_ERROR)
-        }
-        else if( patientWeight < 0){
+        }*/
+        if(patientAge <= 0) return QueryResult.Error(resourcesProvider.getString(R.string.invalid_age),
+            VALIDATION_ERROR)
+
+            if( patientWeight <= 0){
                 return QueryResult.Error(resourcesProvider.getString(R.string.error_weight_negative), VALIDATION_ERROR)
-        }
+            }
+
 
         val patient = Patient(0,patientName,patientAge,patientWeight,patientPicUri,underCareTakerId)
 

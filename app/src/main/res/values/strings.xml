@@ -40,4 +40,13 @@
     <string name="error_name">Name Cannot be null</string>
     <string name="error_weight">Weight Cannot be null</string>
     <string name="error_weight_negative">Weight Cannot be Negative</string>
+    <string name="change_profile_pic">change profile pic</string>
+    <string name="pick_profile_pic_title">Select Picture</string>
+    <string name="pick_image_camera">Open Camera</string>
+    <string name="pick_image_gallery">Open Gallery</string>
+    <string name="invalid_age">Age cannot be zero less than zero</string>
+    <string name="patient_age">Patient Age</string>
+    <string name="patient_name">Patient Name</string>
+    <string name="patient_weight">Patient Weight</string>
+    <string name="enter_patient_details">Enter Patient Details</string>
 </resources>

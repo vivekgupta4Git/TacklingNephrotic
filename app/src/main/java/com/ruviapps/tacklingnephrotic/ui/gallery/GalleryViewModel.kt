@@ -1,21 +1,65 @@
 package com.ruviapps.tacklingnephrotic.ui.gallery
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.net.Uri
+import android.util.Log
+import androidx.databinding.*
+import androidx.lifecycle.*
+import com.firebase.ui.auth.AuthUI
+import com.google.android.material.imageview.ShapeableImageView
+import com.ruviapps.tacklingnephrotic.R
 import com.ruviapps.tacklingnephrotic.database.dto.onFailure
 import com.ruviapps.tacklingnephrotic.database.dto.onSuccess
 import com.ruviapps.tacklingnephrotic.domain.Patient
 import com.ruviapps.tacklingnephrotic.domain.use_cases.patient.PatientUseCases
 import com.ruviapps.tacklingnephrotic.utility.Event
 import com.ruviapps.tacklingnephrotic.utility.NavigationCommand
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 @HiltViewModel
-class GalleryViewModel @Inject constructor(private val patientUseCases: PatientUseCases): ViewModel() {
+class GalleryViewModel @Inject constructor(
+    private val patientUseCases: PatientUseCases,
+): ViewModel() {
+
+    /*
+    logged in userId to be used while saving patient details
+     */
+   private val uid = AuthUI.getInstance().auth.currentUser?.uid ?: ""
+
+    /*
+    temporary profile pic uri
+     */
+    private var tempProfilePicUri: Uri? = null
+
+
+   val patient : Patient = Patient(0,"",0,0f,"",uid)
+
+
+    fun setTemporaryProfilePic(uri: Uri?){
+        tempProfilePicUri = uri
+        if(uri!=null)
+        setProfilePic(uri.toString())
+    }
+    fun getTemporaryProfilePic() : Uri?{
+        return tempProfilePicUri
+    }
+
+    fun onPickImageResult(resultUri: Uri?, targetView: ShapeableImageView) {
+        Picasso.get()
+            .load(resultUri)
+            .resize(200,200)
+            .centerCrop()
+            .placeholder(R.mipmap.patient)
+            .error(R.drawable.ic_baseline_broken_image_24)
+            .into(targetView)
+    }
+
+    private fun setProfilePic(uri : String){
+        patient.patientPicUri = uri
+    }
 
     private var _insertionComplete = MutableLiveData<Boolean>().apply {
         value = false
@@ -25,7 +69,9 @@ class GalleryViewModel @Inject constructor(private val patientUseCases: PatientU
     val navigation : LiveData<Event<NavigationCommand>>
     get() = _navigation
 
-   fun savePatientDetails(patient : Patient) {
+
+
+   fun savePatientDetails() {
         viewModelScope.launch {
             if (_insertionComplete.value == false) {
                 val query = patientUseCases.addPatientUseCase(patient.patientName,

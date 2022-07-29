@@ -1,6 +1,8 @@
 package com.ruviapps.tacklingnephrotic.di.module
 
 import android.content.Context
+import android.graphics.drawable.Drawable
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.room.Room
 import com.ruviapps.tacklingnephrotic.database.NephSyndDatabase

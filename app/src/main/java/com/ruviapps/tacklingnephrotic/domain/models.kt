@@ -1,6 +1,9 @@
 package com.ruviapps.tacklingnephrotic.domain
 
 
+import androidx.databinding.Observable
+import androidx.databinding.ObservableField
+import androidx.databinding.ObservableInt
 import java.time.LocalDate
 import java.util.*
 
@@ -8,18 +11,19 @@ import java.util.*
 data class Patient(
     var patientId : Long,
     var patientName : String,
-    var patientAge : Int,
+    var patientAge :  Int,
     var patientWeight : Float,
     var patientPicUri : String = "",
     var underCareTakerId: String
+
 )
 
 data class CareTaker(
-    var careTakerId : String,
-    var careTakerName : String?,
-    var email : String?,
-    var primaryContact:String,
-    var secondaryContact:String?
+    val careTakerId : String,
+    val careTakerName : String?,
+    val email : String?,
+    val primaryContact:String,
+    val secondaryContact:String?
 )
 
 
