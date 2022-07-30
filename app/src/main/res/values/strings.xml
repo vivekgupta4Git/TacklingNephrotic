@@ -15,10 +15,10 @@
     <string name="app_name_header">Tackling Nephrotic</string>
     <string name="madeInIndia">Made in India</string>
     <string name="client_id">482693276004-qgsf7ettn3lfv4ds11mo9gp28el07tfv.apps.googleusercontent.com</string>
-    <string name="use_another_login_method">Want to Use other login method?</string>
-    <string name="sign_in">Sign In</string>
+    <string name="use_another_login_method">Want to use other login method?</string>
+    <string name="sign_in">Click Me</string>
     <string name="app_name_supporter">with ease..</string>
-    <string name="get_started_button_text">Get Started</string>
+    <string name="get_started_button_text">Login or Sign Up</string>
     <string name="no_internet_exclaim">No Internet Connectivity</string>
     <string name="unknown_error_with_error_code">Unknown Error with Error Code</string>
 
@@ -49,4 +49,9 @@
     <string name="patient_name">Patient Name</string>
     <string name="patient_weight">Patient Weight</string>
     <string name="enter_patient_details">Enter Patient Details</string>
+    <string name="continue_text">continue</string>
+    <string name="age_year">years old</string>
+    <string name="no_reading_picked">No Selection</string>
+    <string name="continue_with_long_click">Long Click Patient to Continue</string>
+    <string name="not_available">Not Available</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.ruviapps.tacklingnephrotic
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.Menu
 import com.google.android.material.snackbar.Snackbar
@@ -19,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 //for dagger hilt , Activity class also need to annotate with entry point with fragment
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity  : AppCompatActivity()  {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -41,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_welcome,R.id.nav_userRole,
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.nav_patient_picker,R.id.nav_userRole,
             R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_result), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
@@ -70,4 +69,6 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
+
 }

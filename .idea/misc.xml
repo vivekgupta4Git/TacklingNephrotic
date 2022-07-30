@@ -16,9 +16,12 @@
         <entry key="..\:/MyProjects/app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.33" />
         <entry key="..\:/MyProjects/app/src/main/res/layout/fragment_gallery.xml" value="0.1" />
         <entry key="..\:/MyProjects/app/src/main/res/layout/fragment_home.xml" value="0.15775972637879435" />
+        <entry key="..\:/MyProjects/app/src/main/res/layout/fragment_patient_dialog.xml" value="0.12868747327917915" />
         <entry key="..\:/MyProjects/app/src/main/res/layout/fragment_slideshow.xml" value="0.15775972637879435" />
         <entry key="..\:/MyProjects/app/src/main/res/layout/fragment_welcome.xml" value="0.25" />
         <entry key="..\:/MyProjects/app/src/main/res/layout/nav_header_main.xml" value="0.1921875" />
+        <entry key="..\:/MyProjects/app/src/main/res/layout/patient_card.xml" value="0.22" />
+        <entry key="..\:/MyProjects/app/src/main/res/layout/patient_list.xml" value="0.15775972637879435" />
         <entry key="..\:/MyProjects/app/src/main/res/layout/reading_slider.xml" value="0.16284201235657547" />
         <entry key="..\:/MyProjects/app/src/main/res/layout/result_picker_fragment.xml" value="0.1921875" />
         <entry key="..\:/MyProjects/app/src/main/res/layout/user_role.xml" value="0.25" />

@@ -25,6 +25,12 @@ sealed class NavigationCommand {
      * don't navigate instead show Error
      */
     data class ShowError(val errMsg : String?) : NavigationCommand()
+
+    /**
+     *
+     *show toast message
+     */
+    data class ShowSnackBar(val msg : String?) : NavigationCommand()
 }
 
 

@@ -33,6 +33,8 @@ class LoginViewModel @Inject constructor(
     @Inject
     lateinit var careTakerUseCases : CareTakerUseCases
 
+
+
     private var _navigation = MutableLiveData< Event<NavigationCommand>>()
     val navigation : LiveData<Event<NavigationCommand>>
     get() = _navigation
@@ -104,7 +106,11 @@ class LoginViewModel @Inject constructor(
                         _navigation.value = Event(NavigationCommand
                             .ToDirection(LoginFragmentDirections.actionNavLoginFragmentToNavUserRole()))
                         else if(patientList.size>1){
-                            //show user another screen consisting of list of patient
+
+                           _navigation.value = Event(NavigationCommand.ToDirection(
+                               LoginFragmentDirections.actionNavLoginFragmentToNavWelcome2(uid)
+                           ))
+                        //show user another screen consisting of list of patient
                             //user can select any one of the patient to get started.
                         }
                     }

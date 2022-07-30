@@ -33,7 +33,7 @@ class UserRoleViewModel @Inject constructor(
     get() = _navigation
 
     fun showSnackBar(){
-        _navigation.value = Event(NavigationCommand.ShowError(resourcesProvider.getString(R.string.select_any_one)))
+        _navigation.value = Event(NavigationCommand.ShowSnackBar(resourcesProvider.getString(R.string.select_any_one)))
     }
 
     fun saveCareTaker(){

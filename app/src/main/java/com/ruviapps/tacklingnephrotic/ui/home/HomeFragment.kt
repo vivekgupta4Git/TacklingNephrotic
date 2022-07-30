@@ -46,7 +46,7 @@ class HomeFragment : BaseFragment() {
         val btton2 = binding.button2
         btton2.setOnClickListener {
             textView2.text = ""
-            homeViewModel.getEntriesByDate()
+            homeViewModel.getEntriesByDate(args.patientId)
         }
 
         homeViewModel.text.observe(viewLifecycleOwner) {
@@ -75,8 +75,8 @@ class HomeFragment : BaseFragment() {
     @SuppressLint("NewApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        homeViewModel.getEntriesByDate()
-        homeViewModel.missedReadings()
+        homeViewModel.getEntriesByDate(args.patientId)
+        homeViewModel.missedReadings(args.patientId)
 
         val textView4 = binding.textView4
         homeViewModel.date.observe(viewLifecycleOwner){

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/nav_gallery">
+    app:startDestination="@id/nav_loginFragment">
 
     <fragment
         android:id="@+id/nav_home"
@@ -14,13 +14,17 @@
             android:name="userTest"
             app:argType="string"
             android:defaultValue='"Negative"' />
+        <argument
+            android:name="patientId"
+            app:argType="long"
+            android:defaultValue="0L" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.ruviapps.tacklingnephrotic.ui.gallery.GalleryFragment"
+        android:name="com.ruviapps.tacklingnephrotic.ui.patient_profile.PatientProfileFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" >
+        tools:layout="@layout/fragment_patient_profile" >
         <action
             android:id="@+id/action_nav_gallery_to_nav_result"
             app:destination="@id/nav_result"
@@ -52,13 +56,17 @@
         android:id="@+id/deepLink"
         app:uri="0drd7hpogt" />
     <fragment
-        tools:layout="@layout/fragment_welcome"
-        android:id="@+id/nav_welcome"
-        android:name="com.ruviapps.tacklingnephrotic.ui.welcome.WelcomeFragment"
-        android:label="Welcome" >
+        tools:layout="@layout/fragment_patient_dialog"
+        android:id="@+id/nav_patient_picker"
+        android:name="com.ruviapps.tacklingnephrotic.ui.select_patient_dialog.PatientPickerDialogFragment"
+        android:label="PatientDialog" >
         <action
             android:id="@+id/action_welcome_to_nav_result"
             app:destination="@id/nav_result" />
+        <argument
+            android:name="careTakerId"
+            app:argType="string"
+            android:defaultValue='""' />
     </fragment>
     <fragment
         android:id="@+id/nav_userRole"
@@ -87,6 +95,11 @@
         <action
             android:id="@+id/action_nav_loginFragment_to_nav_result"
             app:destination="@id/nav_result"
+            app:popUpTo="@id/nav_loginFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_nav_loginFragment_to_nav_welcome2"
+            app:destination="@id/nav_patient_picker"
             app:popUpTo="@id/nav_loginFragment"
             app:popUpToInclusive="true" />
     </fragment>

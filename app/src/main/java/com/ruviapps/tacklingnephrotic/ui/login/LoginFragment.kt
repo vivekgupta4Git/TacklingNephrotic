@@ -7,23 +7,17 @@ import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
-import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 import com.ruviapps.tacklingnephrotic.R
-import com.ruviapps.tacklingnephrotic.database.dto.QueryResult
-import com.ruviapps.tacklingnephrotic.ui.login.BottomSheet
 import com.ruviapps.tacklingnephrotic.ui.login.LoginViewModel.*
+import com.ruviapps.tacklingnephrotic.ui.select_patient_dialog.PatientPickerDialogFragment
 import com.ruviapps.tacklingnephrotic.utility.BaseFragment
-import com.ruviapps.tacklingnephrotic.utility.NavigationCommand
 import com.ruviapps.tacklingnephrotic.utility.observeAndHandleEvent
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.log
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment() {
@@ -40,12 +34,6 @@ class LoginFragment : BaseFragment() {
     ) { result ->
             viewModel.handleResult(result)
     }
-
-
-    private fun observeNavigation(){
-    viewModel.navigation.observeAndHandleEvent(this)
-    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,7 +64,9 @@ class LoginFragment : BaseFragment() {
             val bottomFragment = BottomSheet()
             bottomFragment.show(childFragmentManager, bottomFragment.tag)
         }
-        observeNavigation()
+        viewModel.navigation.observeAndHandleEvent(this)
+
+
     }
 
 }

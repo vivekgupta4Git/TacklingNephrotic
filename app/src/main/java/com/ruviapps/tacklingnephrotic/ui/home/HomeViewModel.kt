@@ -66,9 +66,9 @@ class HomeViewModel @Inject constructor
             }
         }
     }
-    fun missedReadings(){
+    fun missedReadings(id : Long){
         viewModelScope.launch {
-            val q =         resultUseCases.getMissedReadingDatesUseCase(1)
+            val q =         resultUseCases.getMissedReadingDatesUseCase(id)
             q.onSuccess { data, _ ->
                 _date.value = data
             }
@@ -82,12 +82,12 @@ class HomeViewModel @Inject constructor
 
 
 
-    fun getEntriesByDate() {
+    fun getEntriesByDate(id : Long) {
         viewModelScope.launch {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val from = LocalDate.now().minusDays(2)
                 val end = LocalDate.now()
-                val queryResult = resultUseCases.getReadingsByDateUseCase(1, from, end)
+                val queryResult = resultUseCases.getReadingsByDateUseCase(id, from, end)
                 queryResult.onSuccess { data, _ ->
                     _list.emit( data)
                 }

@@ -2,7 +2,6 @@ package com.ruviapps.tacklingnephrotic.ui.test_result
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,31 +11,29 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.cardview.widget.CardView
-import androidx.core.content.FileProvider
+
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageView
 import com.canhub.cropper.options
-import com.ruviapps.tacklingnephrotic.BuildConfig
+
+import com.ruviapps.tacklingnephrotic.R
 import com.ruviapps.tacklingnephrotic.database.entities.ResultCode
 import com.ruviapps.tacklingnephrotic.databinding.ReadingSliderBinding
 import com.ruviapps.tacklingnephrotic.domain.TestResult
 import com.ruviapps.tacklingnephrotic.utility.observeAndHandleEvent
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import java.io.File
 import java.time.LocalDate
-import java.util.*
+
 
 
 @AndroidEntryPoint
 class ResultPickerFragment : BaseFragment() {
 
-    val args : ResultPickerFragmentArgs by navArgs()
+   private val args : ResultPickerFragmentArgs by navArgs()
 
     override var bottomAppBarVisibility: Int = View.GONE
     override var fabVisibility: Int = View.GONE
@@ -44,7 +41,6 @@ class ResultPickerFragment : BaseFragment() {
         const val NO_SELECTION = -100
     }
     private var selectedReadingValue = NO_SELECTION
-    private var latestImageUri : Uri? = null
     private lateinit var scrollView : ScrollView
 
     private lateinit var firstCardPreviewImage : ImageView
@@ -64,20 +60,6 @@ class ResultPickerFragment : BaseFragment() {
     private   lateinit var sliderContainer : CardView
 
 
-    private val takePictureContract = registerForActivityResult(ActivityResultContracts.TakePicture()) { taken ->
-        if (taken) {
-          /*  latestImageUri.let { uri->
-                imageCollection.forEach {
-                    it.visibility = View.VISIBLE
-                    it.setImageURI(uri)
-                }
-            }*/
-        }else{
-            imageCollection.forEach {
-                it.visibility = View.GONE
-            }
-        }
-    }
     private val cropImage = registerForActivityResult(CropImageContract()) { result ->
         if (result.isSuccessful) {
             // use the returned uri
@@ -86,12 +68,10 @@ class ResultPickerFragment : BaseFragment() {
                     it.setImageURI(result.uriContent)
                 }
 
-        // val uriContent = result.uriContent
-           // val uriFilePath = result.getUriFilePath(context) // optional usage
         } else {
             // an error occurred
             val exception = result.error
-            Log.d("ruviApps","$exception")
+            Log.d("myApps","$exception")
             imageCollection.forEach{
                 it.visibility = View.INVISIBLE
             }
@@ -106,33 +86,6 @@ class ResultPickerFragment : BaseFragment() {
         )
     }
 
-    /*    latestImageUri.let {
-            firstCardPreviewImage.visibility = View.VISIBLE
-            secondCardPreviewImage.visibility = View.VISIBLE
-            thirdCardPreviewImage.visibility = View.VISIBLE
-            forthCardPreviewImage.visibility = View.VISIBLE
-            fifthCardPreviewImage.visibility = View.VISIBLE
-            sixthCardPreviewImage.visibility = View.VISIBLE
-            firstCardPreviewImage.setImageURI(it)
-            secondCardPreviewImage.setImageURI(it)
-            thirdCardPreviewImage.setImageURI(it)
-            forthCardPreviewImage.setImageURI(it)
-            fifthCardPreviewImage.setImageURI(it)
-            sixthCardPreviewImage.setImageURI(it)
-
-        }
-    }else
-    {
-        firstCardPreviewImage.visibility  = View.GONE
-        secondCardPreviewImage.visibility = View.GONE
-        thirdCardPreviewImage.visibility = View.GONE
-        forthCardPreviewImage.visibility = View.GONE
-        fifthCardPreviewImage.visibility = View.GONE
-        sixthCardPreviewImage.visibility = View.GONE
-    }
-}
-
-     */
     val viewModel: ResultPickerViewModel by viewModels()
     private lateinit var binding: ReadingSliderBinding
 
@@ -144,12 +97,6 @@ class ResultPickerFragment : BaseFragment() {
         return binding.root
 
     }
-
-
-
-
-
-
 
     private fun clearSelection() = setCardActive(-1)
     private var imageCollection  = mutableListOf<ImageView>()
@@ -193,21 +140,6 @@ class ResultPickerFragment : BaseFragment() {
 
 
         viewModel.navigateToDashBoard.observeAndHandleEvent(this)
-/*
-        viewModel.navigateToDashBoard.observe(viewLifecycleOwner) { event ->
-            event.getContentIfNotHandled()?.let { command ->
-                when (command) {
-                    is NavigationCommand.ToDirection ->
-                        findNavController().navigate(command.directions)
-                    is NavigationCommand.ShowError -> {
-                        Toast.makeText(requireContext(), command.errMsg, Toast.LENGTH_SHORT).show()
-                    }
-                    else -> {}
-                }
-            }
-        }
-*/
-
 
         val container = binding.constraintLayoutContainer
         container.setOnTouchListener { _, event ->
@@ -269,7 +201,6 @@ class ResultPickerFragment : BaseFragment() {
 
             val cameraButton = binding.cameraButton
             cameraButton.setOnClickListener {
-           //     takePicture()
                 crop()
             }
 
@@ -288,7 +219,7 @@ class ResultPickerFragment : BaseFragment() {
                     3 -> ResultCode.THREE_PLUS.name
                     4 -> ResultCode.FOUR_PLUS.name
                     else -> {
-                        Toast.makeText(requireContext(), "No Selection", Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), getString(R.string.no_reading_picked), Toast.LENGTH_LONG).show()
                         return@setOnClickListener
                     }
 
@@ -323,73 +254,6 @@ class ResultPickerFragment : BaseFragment() {
 
         }
 
-
-        /* when(cardAtPosition){
-
-             1 -> {
-                 selectedReadingValue = 4
-                 firstCardView.isActivated = true
-                 secondCardView.isActivated = false
-                 thirdCardView.isActivated = false
-                 forthCardView.isActivated = false
-                 fifthCardView.isActivated= false
-                 sixthCardView.isActivated = false
-             }
-             2 -> {
-                 selectedReadingValue = 3
-                 firstCardView.isActivated = false
-                 secondCardView.isActivated = true
-                 thirdCardView.isActivated = false
-                 forthCardView.isActivated = false
-                 fifthCardView.isActivated= false
-                 sixthCardView.isActivated = false
-             }
-             3 ->{
-                 selectedReadingValue = 2
-                 firstCardView.isActivated = false
-                 secondCardView.isActivated = false
-                 thirdCardView.isActivated = true
-                 forthCardView.isActivated = false
-                 fifthCardView.isActivated= false
-                 sixthCardView.isActivated = false
-             }
-             4 ->{
-                 selectedReadingValue = 1
-                 firstCardView.isActivated = false
-                 secondCardView.isActivated = false
-                 thirdCardView.isActivated = false
-                 forthCardView.isActivated = true
-                 fifthCardView.isActivated= false
-                 sixthCardView.isActivated = false
-             }
-             5 ->{
-                 selectedReadingValue = 0
-                 firstCardView.isActivated = false
-                 secondCardView.isActivated = false
-                 thirdCardView.isActivated = false
-                 forthCardView.isActivated = false
-                 fifthCardView.isActivated= true
-                 sixthCardView.isActivated = false
-             }
-             6 ->{
-                 selectedReadingValue = -1
-                 firstCardView.isActivated = false
-                 secondCardView.isActivated = false
-                 thirdCardView.isActivated = false
-                 forthCardView.isActivated = false
-                 fifthCardView.isActivated= false
-                 sixthCardView.isActivated = true
-             }
-             else ->{
-                 selectedReadingValue = NO_SELECTION
-                 firstCardView.isActivated = false
-                 secondCardView.isActivated = false
-                 thirdCardView.isActivated = false
-                 forthCardView.isActivated = false
-                 fifthCardView.isActivated= false
-                 sixthCardView.isActivated = false
-             }
-         }*/
     }
 
     private fun move(e : MotionEvent){
@@ -436,79 +300,11 @@ class ResultPickerFragment : BaseFragment() {
 
     }
 
-    private fun takePicture(){
-        lifecycleScope.launch {
-            getTmpPicture().let {
-                latestImageUri = it
-                takePictureContract.launch(it)
-            }
-        }
-    }
-
-    private fun getTmpPicture() : Uri?{
-        val tmpFile = File.createTempFile(Calendar.getInstance().timeInMillis.toString(),".jpeg",requireContext().cacheDir).apply {
-            createNewFile()
-            deleteOnExit()
-        }
-        return   FileProvider.getUriForFile(requireContext(), "${BuildConfig.APPLICATION_ID}.provider", tmpFile)
-    }
-
-
 
 }
 
 
 
-
-/* private val touchListener = OnTouchListener { view, event ->
-     val x = event.rawX.toInt()
-     val y = event.rawY.toInt()
-
-
-     when (event.action and MotionEvent.ACTION_MASK) {
-
-
-
-         MotionEvent.ACTION_DOWN -> {
-             val lParams = view.layoutParams as FrameLayout.LayoutParams
-             xDelta = x - lParams.leftMargin
-             yDelta = y - lParams.topMargin
-         }
-         MotionEvent.ACTION_UP -> {
-             val lparas = view.layoutParams as FrameLayout.LayoutParams
-             xDelta = x - lparas.leftMargin
-             yDelta = y- lparas.bottomMargin
-         }
-
-         MotionEvent.ACTION_MOVE -> {
-             if (y - yDelta + view.height <= container.getHeight() && y - yDelta >= 0) {
-             val layoutParams = view.layoutParams as FrameLayout.LayoutParams
-             layoutParams.topMargin = y - yDelta
-             layoutParams.bottomMargin = 0
-             view.layoutParams = layoutParams
-         }
-
-           *//* if (x - xDelta + view.width <= container.getWidth() && y - yDelta + view.height <= container.getHeight() && x - xDelta >= 0 && y - yDelta >= 0) {
-                    val layoutParams = view.layoutParams as FrameLayout.LayoutParams
-                    layoutParams.leftMargin = x - xDelta
-                    layoutParams.topMargin = y - yDelta
-                    layoutParams.rightMargin = 0
-                    layoutParams.bottomMargin = 0
-                    view.layoutParams = layoutParams
-                }*//*
-            }
-
-            MotionEvent.ACTION_BUTTON_PRESS ->{
-
-            }
-
-
-        }
-        container.invalidate()
-        true
-    }
-
-}*/
 
 /*
 //use of compose
