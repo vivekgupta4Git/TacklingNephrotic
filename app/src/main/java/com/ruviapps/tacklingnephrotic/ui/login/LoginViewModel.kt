@@ -55,7 +55,7 @@ class LoginViewModel @Inject constructor(
         }
         return AuthUI.getInstance()
             .createSignInIntentBuilder()
-            .setIsSmartLockEnabled(true)       //for testing purpose set  it to false
+            .setIsSmartLockEnabled(false)       //for testing purpose set  it to false
             .setLogo(R.mipmap.ic_launcher)
             .setTheme(R.style.Theme_MyLoginTheme)
             .setAvailableProviders(providerToUse)

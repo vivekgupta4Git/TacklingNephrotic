@@ -57,7 +57,7 @@ class LoginFragment : BaseFragment() {
 
         val getStartedButton = view.findViewById<MaterialButton>(R.id.getStartedButton)
         getStartedButton.setOnClickListener {
-            signInLauncher.launch(viewModel.getSignInIntent(Provider.EMAIL_PROVIDER))
+            signInLauncher.launch(viewModel.getSignInIntent(Provider.GOOGLE_PROVIDER))
         }
 
         signIn.setOnClickListener {

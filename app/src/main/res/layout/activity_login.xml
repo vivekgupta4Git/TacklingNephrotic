@@ -36,6 +36,7 @@
         app:layout_constraintTop_toBottomOf="@+id/appHeaderTv" />
 
     <com.google.android.material.button.MaterialButton
+        app:icon="@drawable/googleg_disabled_color_18"
         android:id="@+id/getStartedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

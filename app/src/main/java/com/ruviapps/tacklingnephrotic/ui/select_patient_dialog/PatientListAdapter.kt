@@ -2,6 +2,7 @@ package com.ruviapps.tacklingnephrotic.ui.select_patient_dialog
 
 import android.net.Uri
 import android.text.Layout
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -16,6 +17,7 @@ import com.ruviapps.tacklingnephrotic.databinding.PatientCardBinding
 import com.ruviapps.tacklingnephrotic.domain.Patient
 import com.squareup.picasso.Picasso
 import java.io.File
+import java.util.*
 
 class PatientListAdapter(private val clickListener: PatientClickListener) : ListAdapter<Patient,PatientListAdapter.PatientViewHolder>(PatientDiffItemCallback()) {
 
@@ -81,12 +83,26 @@ fun ShapeableImageView.setPatientImage(uri : String){
     }
 }
 
-@BindingAdapter("patientAge")
+@BindingAdapter("app:patientAge")
 fun TextView.setPatientAge(age : Int){
     text = if(age<=0){
         context.getString(R.string.not_available)
     }else
     {
         age.toString() + " " + context.getString(R.string.age_year)
+    }
+}
+@BindingAdapter("app:PatientName")
+fun setPatientName(view : TextView,name : String?){
+    if(name ==null || name.isEmpty()){
+       view.text =  view.context.getString(R.string.no_name)
+    }else
+    {
+        view.text = name.replaceFirstChar {
+            if (it.isLowerCase())
+                it.titlecase(Locale.getDefault())
+            else
+                it.toString()
+        }
     }
 }

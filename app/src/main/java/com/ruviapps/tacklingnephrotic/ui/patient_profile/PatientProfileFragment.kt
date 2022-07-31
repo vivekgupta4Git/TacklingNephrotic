@@ -116,39 +116,3 @@ class PatientProfileFragment : BaseFragment() {
 
 }
 
-/**
- * Imageview doesn't have get property defined for android:src , so defining one
- */
-
-@InverseBindingAdapter(attribute = "android:src", event = "android:srcAttrChanged")
-fun getImageUri(view: ImageView): String {
-return ""
-}
-
-
-/*
-listener for change in attribute value of android:src
- */
-@BindingAdapter(value= ["android:srcAttrChanged"],requireAll = false)
-fun setImageUriChangedWatcher(view: ImageView,listener : InverseBindingListener?){
-
-
-}
-
-/*
-interface OnImageUriChanged{
-    fun onImageUriChanged()
-}*/
-
-/*
-val newListener : OnImageUriChanged?
-
-    if(listener==null)
-        newListener= null
-    else
-     newListener = object : OnImageUriChanged {
-        override fun onImageUriChanged() {
-            Log.d("ruviApps","On imageUri changed")
-        }
-    }
- */

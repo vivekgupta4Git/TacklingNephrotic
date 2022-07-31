@@ -64,7 +64,7 @@ class BottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.loginButton.setOnClickListener {
-            signInLaunch.launch(sharedViewModel.getSignInIntent(LoginViewModel.Provider.GOOGLE_PROVIDER))
+            signInLaunch.launch(sharedViewModel.getSignInIntent(LoginViewModel.Provider.EMAIL_PROVIDER))
         }
 
         val phoneButton = binding.phoneBtn
