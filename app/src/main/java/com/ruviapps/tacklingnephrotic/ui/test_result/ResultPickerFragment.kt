@@ -24,6 +24,7 @@ import com.ruviapps.tacklingnephrotic.R
 import com.ruviapps.tacklingnephrotic.database.entities.ResultCode
 import com.ruviapps.tacklingnephrotic.databinding.ReadingSliderBinding
 import com.ruviapps.tacklingnephrotic.domain.TestResult
+import com.ruviapps.tacklingnephrotic.utility.BaseFragment
 import com.ruviapps.tacklingnephrotic.utility.observeAndHandleEvent
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
@@ -35,8 +36,11 @@ class ResultPickerFragment : BaseFragment() {
 
    private val args : ResultPickerFragmentArgs by navArgs()
 
-    override var bottomAppBarVisibility: Int = View.GONE
-    override var fabVisibility: Int = View.GONE
+    override val isBottomBarVisible: Int
+        get() = View.GONE
+    override val isFabVisible: Int
+        get() = View.GONE
+
     companion object {
         const val NO_SELECTION = -100
     }

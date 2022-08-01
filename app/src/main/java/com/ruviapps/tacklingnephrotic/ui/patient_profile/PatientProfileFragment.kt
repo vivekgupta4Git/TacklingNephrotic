@@ -6,16 +6,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.databinding.BindingAdapter
-import androidx.databinding.InverseBindingAdapter
-import androidx.databinding.InverseBindingListener
 import androidx.fragment.app.viewModels
 import com.google.android.material.imageview.ShapeableImageView
 import com.ruviapps.tacklingnephrotic.R
 import com.ruviapps.tacklingnephrotic.databinding.FragmentPatientProfileBinding
-import com.ruviapps.tacklingnephrotic.ui.test_result.BaseFragment
+import com.ruviapps.tacklingnephrotic.utility.BaseFragment
 import com.ruviapps.tacklingnephrotic.utility.ImageUtility
 import com.ruviapps.tacklingnephrotic.utility.ImagesDirectory
 import com.ruviapps.tacklingnephrotic.utility.observeAndHandleEvent
@@ -30,8 +26,11 @@ class PatientProfileFragment : BaseFragment() {
     private lateinit var imageView : ShapeableImageView
     private var latestTmpUri: Uri? = null
 
-    override var bottomAppBarVisibility: Int = View.GONE
-    override var fabVisibility: Int = View.GONE
+    override val isBottomBarVisible: Int
+        get() = View.GONE
+    override val isFabVisible: Int
+        get() = View.GONE
+
     private lateinit var _binding: FragmentPatientProfileBinding
     private  val patientProfileViewModel: PatientProfileViewModel by viewModels()
 

@@ -5,10 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ruviapps.tacklingnephrotic.databinding.FragmentSlideshowBinding
-import com.ruviapps.tacklingnephrotic.ui.test_result.BaseFragment
+import com.ruviapps.tacklingnephrotic.utility.BaseFragment
 
 class SlideshowFragment : BaseFragment() {
 
