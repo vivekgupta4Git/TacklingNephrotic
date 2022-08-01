@@ -51,7 +51,7 @@
 
             <TextView
                 tools:text="Patient Name"
-                app:PatientName="@{patient.patientName}"
+                app:patientName="@{patient.patientName}"
                 android:id="@+id/nameOfPatient"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

@@ -26,7 +26,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val resourcesProvider: AppModule.ResourcesProvider,
     private val patientUseCases: PatientUseCases
     ) : ViewModel() {
 
@@ -121,19 +120,19 @@ class LoginViewModel @Inject constructor(
             //user has pressed the back button
             if(loginResponse== null) {
                 _navigation.value =
-                    Event((NavigationCommand.ShowError(resourcesProvider.getString(R.string.login_cancelled))))
+                    Event((NavigationCommand.ShowErrorInt(R.string.login_cancelled)))
                     return
             }
 
             //no or slow network
             if(loginResponse.error?.errorCode == ErrorCodes.NO_NETWORK) {
                 _navigation.value =
-                    Event(NavigationCommand.ShowError(resourcesProvider.getString(R.string.no_internet_exclaim)))
+                    Event(NavigationCommand.ShowErrorInt(R.string.no_internet_exclaim))
                 return
             }
 
             //unknown error
-            _navigation.value = Event(NavigationCommand.ShowError(resourcesProvider.getString(R.string.login_failed_msg2)))
+            _navigation.value = Event(NavigationCommand.ShowErrorInt(R.string.login_failed_msg2))
         }
     }
 

@@ -40,9 +40,9 @@ object UseCaseModule {
 
     @Provides
     @ActivityScoped
-    fun providesPatientUseCase(repo: PatientLocalRepository,resourcesProvider: AppModule.ResourcesProvider) : PatientUseCases{
+    fun providesPatientUseCase(repo: PatientLocalRepository) : PatientUseCases{
         return PatientUseCases(
-            addPatientUseCase = AddPatientUseCase(repo,resourcesProvider),
+            addPatientUseCase = AddPatientUseCase(repo),
             removePatientUseCase = RemovePatientUseCase(repo),
             getPatientUseCases = GetPatientUseCase(repo),
             getAllPatientForCareTakerUseCase = GetAllPatientForCareTakerUseCase(repo)

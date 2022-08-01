@@ -20,7 +20,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UserRoleViewModel @Inject constructor(
-   private val resourcesProvider: AppModule.ResourcesProvider,
    val patientUseCases: PatientUseCases
    ) : ViewModel() {
 
@@ -33,7 +32,7 @@ class UserRoleViewModel @Inject constructor(
     get() = _navigation
 
     fun showSnackBar(){
-        _navigation.value = Event(NavigationCommand.ShowSnackBar(resourcesProvider.getString(R.string.select_any_one)))
+        _navigation.value = Event(NavigationCommand.ShowSnackBar(R.string.select_any_one))
     }
 
     fun saveCareTaker(){
@@ -50,11 +49,12 @@ class UserRoleViewModel @Inject constructor(
         viewModelScope.launch {
     withContext(this.coroutineContext){
         val query =
-            patientUseCases.addPatientUseCase(patientName = name,
+            patientUseCases./*  by default using 1f as a weight */
+            addPatientUseCase.invoke(patientName = name,
                 patientAge = 1,
-                patientWeight = 1f ,            /*  by default using 1f as a weight */
+                patientWeight = 1f,            /*  by default using 1f as a weight */
                 patientPicUri = "",
-                underCareTakerId = uid )
+                underCareTakerId = uid)
         query.onSuccess { patientId, _ ->
             _navigation.value =
                 Event(NavigationCommand

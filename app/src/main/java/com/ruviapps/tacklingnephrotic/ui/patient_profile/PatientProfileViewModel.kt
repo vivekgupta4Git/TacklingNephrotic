@@ -67,11 +67,17 @@ class PatientProfileViewModel @Inject constructor(
     val navigation : LiveData<Event<NavigationCommand>>
     get() = _navigation
 
+    fun validatePatient(patient: Patient) : Boolean{
+      return  !(patient.patientName == "" ||patient.patientAge <= 0 || patient.patientWeight <=0)
+
+    }
 
 
    fun savePatientDetails() {
+       validatePatient()
         viewModelScope.launch {
             if (_insertionComplete.value == false) {
+
                 val query = patientUseCases.addPatientUseCase(patient.patientName,
                     patient.patientAge,
                     patient.patientWeight,
@@ -91,6 +97,16 @@ class PatientProfileViewModel @Inject constructor(
                     _navigation.value = Event(NavigationCommand.ShowError(message))
                 }
             }
+        }
+    }
+
+    private fun validatePatient() {
+        if (patient.patientName == "") {
+            Event(NavigationCommand.ShowErrorInt(R.string.error_name))
+        } else if (patient.patientAge <= 0) {
+            Event(NavigationCommand.ShowErrorInt(R.string.invalid_age))
+        } else if (patient.patientWeight <= 0) {
+            Event(NavigationCommand.ShowErrorInt(R.string.error_weight_negative))
         }
     }
 }

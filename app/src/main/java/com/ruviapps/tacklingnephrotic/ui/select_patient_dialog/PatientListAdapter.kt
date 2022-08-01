@@ -83,7 +83,7 @@ fun ShapeableImageView.setPatientImage(uri : String){
     }
 }
 
-@BindingAdapter("app:patientAge")
+@BindingAdapter("patientAge")
 fun TextView.setPatientAge(age : Int){
     text = if(age<=0){
         context.getString(R.string.not_available)
@@ -92,7 +92,7 @@ fun TextView.setPatientAge(age : Int){
         age.toString() + " " + context.getString(R.string.age_year)
     }
 }
-@BindingAdapter("app:PatientName")
+@BindingAdapter("patientName")
 fun setPatientName(view : TextView,name : String?){
     if(name ==null || name.isEmpty()){
        view.text =  view.context.getString(R.string.no_name)

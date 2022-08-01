@@ -1,4 +1,5 @@
 package com.ruviapps.tacklingnephrotic.utility
+import androidx.annotation.StringRes
 import androidx.navigation.NavDirections
 
 /**
@@ -30,7 +31,12 @@ sealed class NavigationCommand {
      *
      *show toast message
      */
-    data class ShowSnackBar(val msg : String?) : NavigationCommand()
+    data class ShowSnackBar(@StringRes val resId: Int) : NavigationCommand()
+
+    /**
+     * show String Resource Error
+     */
+    data class ShowErrorInt(@StringRes val resId: Int) : NavigationCommand()
 }
 
 
